@@ -15,12 +15,16 @@ module.exports.query=(query,callback)=>{
     });
     connection.connect((error)=>
     {
-        if(error)
+        if(error){
             callback(error);
+            return;
+        }
             connection.query(query,(err,results)=>
             {
-                if(err)
-                callback(err);
+                if(err){
+                    callback(err);
+                    return;
+                }
                 connection.end((err)=>
                 {
                     callback(err,results);            
