@@ -2,6 +2,11 @@
   "name": "knowyourhostelmess",
   "version": "1.0",
   "dependencies": {
-    "mysql": "^2.15.0"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "hbs": "^4.0.1",
+    "mysql": "^2.15.0",
+    "sha256": "^0.2.0",
+    "yargs": "^11.0.0"
   }
 }
