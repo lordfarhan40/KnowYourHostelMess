@@ -55,11 +55,25 @@ const getUserById=(id,callback)=>
         }
         callback(err,userDetails);        
     });
-}
+};
 
-const 
+const changePassword=(id,newPassword,callback)=>
+{
+    if(id===undefined||newPassword===undefined)
+    {
+        callback("Provide an ID and Password");
+        return;
+    }
+    const changePasswordQuery=`
+        UPDATE USERS
+        SET password=\"${newPassword}\"
+        WHERE uid=\"${id}\"
+    `;
+    connection.query(changePasswordQuery,callback);
+};
 
 module.exports={
     createUser,
-    getUserById
+    getUserById,
+    changePassword
 }
