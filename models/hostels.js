@@ -23,10 +23,7 @@ const getHostelsList=(callback)=>
     const createHostelQuery=`
         SELECT hid,name FROM HOSTELS
     `;
-    connection.query(createHostelQuery,(err,result)=>
-    {
-        console.log(result);
-    });
+    connection.query(createHostelQuery,callback);
 };
 
 module.exports={
