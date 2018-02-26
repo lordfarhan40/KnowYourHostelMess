@@ -27,15 +27,15 @@ app.get('/LoginPage', (request, response) => {
 app.post('/AdminPage', urlencodedParser, (request, response) => {
 	var userID = request.body.id_text;
 	var password = request.body.password_text;
-	validator.validUserID(userID, (error, result) => {
-		if(result !== true)
-			console.log(error);
-	});
+	// validator.validUserID(userID, (error, result) => {
+	// 	if(result !== true)
+	// 		console.log(error);
+	// });
 
-	validator.validPassword(password, (error, result) => {
-		if(result !== true)
-			console.log(error);
-	});
+	// validator.validPassword(password, (error, result) => {
+	// 	if(result !== true)
+	// 		console.log(error);
+	// });
 
 	password = sha(password);
 
@@ -43,10 +43,13 @@ app.post('/AdminPage', urlencodedParser, (request, response) => {
 		if(error)
 			console.log(error);
 		else {
-			if(userID != result.id || password != result.password)
+			if(userID !== result.id || password !== result.password) {
+				response.render('LoginPage');
+				response.send('<h1 color=red>Unable to recognize user</h1>');
 				console.log('Unable to recognize user');
+			}
 			else {
-				response.render('/LoginSuccess', {
+				response.render('LoginSuccess', {
 					name: result.name,
 					isAdmin: result.isAdmin,
 					contact: result.contact,
