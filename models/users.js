@@ -56,7 +56,6 @@ const getUserById=(id,callback)=>
                 name: undefined
             }
         }
-        else {
             userDetails={
                 id:result.uid,
                 password:result.password,
@@ -66,7 +65,6 @@ const getUserById=(id,callback)=>
                 name:result.name
             }
             callback(err,userDetails);        
-        }
     });
 };
 

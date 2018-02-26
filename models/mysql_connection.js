@@ -2,7 +2,7 @@ const mysql=require('mysql')
 
 const host="localhost";
 const user="root";
-const password="";    //Replace with your own user password
+const password="root";    //Replace with your own user password
 const database="knowyourmess";
 
 
@@ -27,6 +27,7 @@ module.exports.query=(query,callback)=>{
                 }
                 connection.end((err)=>
                 {
+
                     callback(err,results);            
                 });
             });
