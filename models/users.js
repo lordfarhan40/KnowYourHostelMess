@@ -3,7 +3,7 @@ const connection=require('./mysql_connection.js');
 const TableStructure=`
     CREATE TABLE IF NOT EXISTS USERS(
         uid char(10) NOT NULL,
-        password char(40) NOT NULL,
+        password char(70) NOT NULL,
         isAdmin int NOT NULL,
         contact char(15),
         hostel_id int NOT NULL,
@@ -20,9 +20,10 @@ const createUser=(userDetails,callback)=>
         return;
     }
     const createUserQuery=`
-    INSERT INTO USERS(uid,password,hostel_id,name) values(\
+    INSERT INTO USERS(uid,password,isAdmin,hostel_id,name) values(\
         "${userDetails.id}\",
         \"${userDetails.password}\",
+        ${userDetails.isAdmin},
         ${userDetails.hostel_id},
         \"${userDetails.name}\"
     )`;
@@ -45,15 +46,25 @@ const getUserById=(id,callback)=>
             return;
         }
         result=result[0];
-        userDetails={
-            id:result.uid,
-            password:result.password,
-            isAdmin:result.isAdmin,
-            contact:result.contact,
-            hostel_id:result.hostel_id,
-            name:result.name
+        if(result === undefined) {
+            result = {
+                uid: undefined,
+                password: undefined,
+                isAdmin: undefined,
+                contact: undefined,
+                hostel_id: undefined,
+                name: undefined
+            }
         }
-        callback(err,userDetails);        
+            userDetails={
+                id:result.uid,
+                password:result.password,
+                isAdmin:result.isAdmin,
+                contact:result.contact,
+                hostel_id:result.hostel_id,
+                name:result.name
+            }
+            callback(err,userDetails);        
     });
 };
 
