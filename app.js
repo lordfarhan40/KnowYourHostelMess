@@ -15,7 +15,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var app = express();
 app.use(express.static(__dirname +'/public/'));
 app.set('view engine', 'hbs');
-
+hbs.registerPartials(__dirname +'/views/partials/');
 
 /* 
 	Main Page will contain list of hostels and links for login
