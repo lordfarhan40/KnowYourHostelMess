@@ -36,9 +36,13 @@ app.get('/', (request, response) => {
 				viewable html table using the htmlGeneraor 
 				(Will be replaced with other viewable object in html)
 			*/
-
-			response.render('index', {
-				table: htmlGenerator.generateHostelTable(result)
+			
+			var hostel = [];
+			result.forEach((x) =>{
+				hostel.push({hostelName: x.name, hostelId: x.hid});
+			});
+			response.render('index', { 
+				hostel
 			});
 
 		}
