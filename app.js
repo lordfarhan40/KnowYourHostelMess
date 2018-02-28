@@ -46,6 +46,23 @@ app.get('/', (request, response) => {
 
 });
 
+app.get("/hostel",(req,res)=>
+{
+	var hostelId=req.query.hid;
+	hostel.getHostelById(hostelId,(err,queryRep)=>
+	{
+		if(err){
+			console.log(err);
+			return;
+		}
+		hostel.name=queryRep.name;
+		hostel.pde=queryRep.pde;
+		console.log(queryRep);
+		res.render("hostel.hbs",hostel);
+	});
+});
+
+
 /*
 	LoginPage is temperory but main feature would be to provid options
 	for login....
