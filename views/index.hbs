@@ -1,65 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-	{{>header}}
-	<body>
-		{{>nav}}
-
-   
+  {{>header}}
+  <body>
+    {{>nav}}
       <div class="main">
 
           
           <hr>
           
-          <h2>CHOOSE YOUR HOSTEL</h2>
+          <h2>HOSTELS</h2>
                    
          
-          <div class="row">
-            <div class="column">
+          <div class="row bg-dark" >
+
+            {{#each hostel}}
+            <div class="col-xm-3 column">
+             <a href="#">
               <div class="content">
-               <a  h href="#">
-                <img src="images/hostel1.jpg" alt="Mountains" style="width:100%">
-                <h3>KNGH</h3></a>
-                <p>Notification and other details for kngh can be put here</p>
+              <img src="images/{{hostelId}}" alt="Mountains" height="10%" width="21%">
+              <p><h5>{{hostelName}}</h5></p>
               </div>
+              </a>
             </div>
-            <div class="column">
-              <div class="content">
-              <a  h href="#">
-              <img src="images/hostel2.jpg" alt="Lights" style="width:90%">
-                <h3>SVBH</h3></a>
-                <p>Notification and other details for SBVH can be put here</p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="content">
-                <a  h href="#">
-                     <img src="images/hostel3.jpg" alt="Nature" style="width:105%">
-                <h3>TILEK</h3></a>
-                <p>Notification and other details for TILEK can be put here</p>
-              </div>
-            </div>
-            <div class="column">
-              <div class="content">
-             <a  h href="#">
-              <img src="images/hostel4.jpg" alt="Mountains" style="width:95%">
-                <h3>IH-B</h3></a>>
-                <p>Notification and other details for IH-B can be put here</p>
-              </div>
-            </div>
+            {{/each}}
           <!-- END GRID -->
           </div>
-          
-          <div class="content">
-          <a  h href="#">
-            <img src="images/hostel6.jpg" alt="Bear" style="width:100%">
-            <h3>TAGORE</h3></a>
-            <p>TAGORE hostel notification and Activities</p>
-          </div>
-          
-          <!-- END MAIN -->
-          </div>
+
+          <!-- Modal for Login -->
           
 
-	{{>footer}}
-	</body>
+          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: absolute;top: 20%">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="login" method="post">
+                    <div class="form-group" style="padding: 10px">
+                      <input type="text" class="form-control" placeholder="Enter Username" name="id_text">
+                      <input type="password" class="form-control" placeholder="Enter Password" name="password_text" style="margin-top: 20px">
+                       <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px">Login</button>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+
+
+        {{>footer}}
+  </body>
 </html>
