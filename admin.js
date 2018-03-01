@@ -155,11 +155,10 @@ function setUpRoutes(app){
     res.redirect('/');
   });
 
-  app.get('/EditProfile', (req, res) => {
-    if(req.user === undefined)
-      res.redirect('/login');
-    else
-      res.render('EditProfile', {user: res.user});
+  app.get('/EditProfile',
+  require('connect-ensure-login').ensureLoggedIn('/login'),
+  (req, res) => {
+    res.render('EditProfile', {user: req.user});
   });
 }
 
