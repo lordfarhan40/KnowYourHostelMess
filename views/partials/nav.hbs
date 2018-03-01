@@ -14,8 +14,16 @@
     {{#if user}}
       <ul class="navbar-nav mr-right" style="margin-right: 50px">
         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Hi, {{user.name}}
-        </li>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/EditProfile">Edit Profile</a>
+          <a class="dropdown-item" href="#">Management</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
+      </li>
       </ul>
     {{else}}
       <ul class="navbar-nav mr-right" style="margin-right: 50px">
