@@ -21,33 +21,31 @@ hbs.registerPartials(__dirname +'/views/partials/');
 	Main Page will contain list of hostels and links for login
 */
 
+require('./admin.js').setUpRoutes(app);
+
 app.get('/', (request, response) => {
-	
 	//Getting hostel list from database
 	hostel.getHostelsList((error, result) => {
 		if(error !== undefined) 
 			console.log('Error in database');
 		else {
 			console.log(`${result.length} Hostels found in database`);
-		
 			/* 
 				Below part is a sample how to send data to html page
 				Grabbing all the hostel lists from database and then converting it to a
 				viewable html table using the htmlGeneraor 
 				(Will be replaced with other viewable object in html)
 			*/
-			
 			var hostel = [];
 			result.forEach((x) =>{
 				hostel.push({hostelName: x.name, hostelId: x.hid});
 			});
 			response.render('index', { 
-				hostel
+				hostel,
+				user:request.user
 			});
-
 		}
 	});
-
 });
 
 
@@ -67,7 +65,6 @@ app.get("/hostel",(req,res)=>
 	});
 });
 
-require('./admin.js').setUpRoutes(app);
 
 app.listen(port, () => {
 	console.log(`Server is listenning on port: ${port}`);

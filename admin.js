@@ -22,7 +22,7 @@ passport.use(new Strategy({
       if (user.password != password) { return cb(null, false); }
       return cb(null, user);
     });
-  }));
+}));
 
 
 // Configure Passport authenticated session persistence.
@@ -138,6 +138,7 @@ function setUpRoutes(app){
 
   app.get('/login',
   function(req, res){
+    console.log(req.user);
     res.render('LoginPage.hbs');
   });
 
@@ -145,7 +146,7 @@ function setUpRoutes(app){
   app.post('/login', 
   passport.authenticate('local',{ failureRedirect: '/login' }),
   function(req, res) {
-    res.send("Login successfull");
+    res.redirect("/");
   });
 
   app.get('/logout',
