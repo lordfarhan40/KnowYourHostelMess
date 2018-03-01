@@ -2,7 +2,7 @@ const mysql=require('mysql')
 
 const host="localhost";
 const user="root";
-const password="akram12345";    //Replace with your own user password
+const password="";    //Replace with your own user password
 const database="knowyourmess";
 
 

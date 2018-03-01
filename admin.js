@@ -57,8 +57,6 @@ function setUpRoutes(app){
   app.use(passport.initialize());
   app.use(passport.session());
 
-
-
   app.post('/create_user',
   require('connect-ensure-login').ensureLoggedIn('/login'),
   function(req, res){
@@ -100,6 +98,42 @@ function setUpRoutes(app){
     })
   });
 
+  app.get('/create_hostel',
+  require('connect-ensure-login').ensureLoggedIn('/login'),
+  function(req, res){
+    if(req.user.is_admin==0){
+      res.send("You are not the admin!.");
+      return;
+    }
+    hostels.getHostelsList((err,hostels)=>
+    {
+      res.render('createHostel.hbs');
+    })
+  });
+
+  app.post('/create_hostel',
+  require('connect-ensure-login').ensureLoggedIn('/login'),
+  function(req, res){
+    if(req.user.is_admin==0){
+      res.send("You are not the admin!.");
+      return;
+    }
+    var hostelDetails={
+      name:req.body.name,
+      description:req.body.description
+    };
+    hostels.createHostel(hostelDetails,(err,isSuccess)=>
+    {
+      if(!err&&isSuccess==true)
+      {
+        res.redirect("/");
+      }else
+      {
+        console.log(err);
+        res.send("Error occured");
+      }
+    });
+  });
 
 
   app.get('/login',

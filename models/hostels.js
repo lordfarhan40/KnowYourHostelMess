@@ -22,13 +22,20 @@ const createHostel=(hostelDetails,callback)=>
     var pdeValue=hostelDetails.pde===undefined?0:hostelDetails.pde;
     
     var descriptionField="description";
-    var descriptionValue=`\"${hostelDetails.pde}\"`;
+    var descriptionValue=hostelDetails.description===undefined?"":`\"${hostelDetails.description}\"`;
 
     const createHostelQuery=`
         INSERT INTO HOSTELS(name, ${pdeField}, ${descriptionField}) 
-        VALUES(\"${hostelDetails}\", ${pdeValue},${descriptionValue} );
+        VALUES(\"${hostelDetails.name}\", ${pdeValue},${descriptionValue} );
     `;
-    connection.query(createHostelQuery,callback);
+    connection.query(createHostelQuery,(err,res)=>
+    {
+        if(err)
+        {
+            return callback(err,false);
+        }else
+            return callback(undefined,true);
+    });
 };
 
 const getHostelsList=(callback)=>
