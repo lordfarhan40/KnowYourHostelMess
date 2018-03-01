@@ -1,8 +1,29 @@
 <!DOCTYPE html>
 <html>
 	{{>header}}
-<body>
+<body style="background-color: #222222">
 	{{>nav}}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xm-12 col-sm-12 col-md-10 col-lg-6" style="margin: 0 auto; padding: 0 auto;">
+				<form class="jumbotron">
+					<div align="right">
+						<div  class = "col-lg-3 col-md-3 col-sm-3 col-xm-1 bg-dark">
+						<img src="images/logo.png" width="100%" height="100%">
+					</div>
+
+						<button class="col-lg-3 col-md-3 col-sm-3 col-xm-1 btn btn-secondary form-control" style="margin-top: 5px;">Upload Image</button>
+				</div>
+				<b>Name</b><input type="text" class="form-control" placeholder="Enter Name" value="Sample Username" name="username"><br>
+				<b>Password</b><input type="password" class="form-control" placeholder="Password" value="1234567890" name="password"><br>
+				<b>Confirm Password</b><input type = "password" class="form-control" placeholder="Confirm Password" value="1234567890" name="confirmPassword"><br>
+				<button type="submit" class="form-control btn btn-primary">Submit</button>
+				</form>
+			</div>
+			
+		</div>
+	</div>
 	{{>footer}}
 </body>
 </html>

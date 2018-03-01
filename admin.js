@@ -154,6 +154,13 @@ function setUpRoutes(app){
     req.logout();
     res.redirect('/');
   });
+
+  app.get('/EditProfile', (req, res) => {
+    if(req.user === undefined)
+      res.redirect('/login');
+    else
+      res.render('EditProfile', {user: res.user});
+  });
 }
 
 module.exports={
