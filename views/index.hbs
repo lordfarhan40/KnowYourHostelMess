@@ -2,9 +2,7 @@
 <html lang="en">
 	{{>header}}
 	<body>
-		{{>nav}}
-
-   
+    {{>nav}}
       <div class="main">
 
           
@@ -27,17 +25,36 @@
             {{/each}}
           <!-- END GRID -->
           </div>
+
+          <!-- Modal for Login -->
           
-          
-          <!-- <div class="content">
-          <a  h href="#">
-            <img src="images/hostel6.jpg" alt="Bear" style="width:100%">
-            <h3>TAGORE</h3></a>
-            <p>TAGORE hostel notification and Activities</p>
+
+          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: absolute;top: 20%">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="AdminPage" method="post">
+                    <div class="form-group" style="padding: 10px">
+                      <input type="text" class="form-control" placeholder="Enter Username" name="id_text">
+                      <input type="password" class="form-control" placeholder="Enter Password" name="password_text" style="margin-top: 20px">
+                       <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px">Login</button>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
-           -->
-          <!-- END MAIN -->
           </div>
+
+
+
         {{>footer}}
 	</body>
 </html>
