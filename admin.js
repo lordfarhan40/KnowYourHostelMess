@@ -2,6 +2,7 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 const sha = require('sha256');
 const users = require('./models/users.js');
+const hostels=require('./models/hostels.js');
 
 // Configure the local strategy for use by Passport.
 //
@@ -55,40 +56,58 @@ function setUpRoutes(app){
   // session.
   app.use(passport.initialize());
   app.use(passport.session());
+
+
+
   app.post('/create_user',
   require('connect-ensure-login').ensureLoggedIn('/login'),
   function(req, res){
-    if(user.is_admin==0){
+    if(req.user.is_admin==0){
       res.send("You are not the admin, you cannot create another user");
       return;
     }
 
     var userDetails={
-      uid:request.body.uid,
-      password:sha(request.body.password),
-      is_admin:request.body.is_admin,
-      contact:request.body.contact,
-      hostel_id:request.body.hostel_id,
-      name:request.body.name,
+      uid:req.body.uid,
+      password:sha(req.body.password),
+      is_admin:req.body.is_admin===undefined?0:1,
+      hostel_id:req.body.hostel_id,
+      name:req.body.name,
     }
-    users.createUser(userDetails,(err,res)=>
+    users.createUser(userDetails,(err,created)=>
     {
-      if(!err&&res==true)
+      if(!err&&created==true)
       {
         res.send("The user got inserted!");
       }else
       {
+       console.log(err);
         res.send("The user insertion failed!");
       }
     });
   });
+
+  app.get('/create_user',
+  require('connect-ensure-login').ensureLoggedIn('/login'),
+  function(req, res){
+    if(req.user.is_admin==0){
+      res.send("You are not the admin!.");
+      return;
+    }
+    hostels.getHostelsList((err,hostels)=>
+    {
+      res.render('createUser.hbs',{hostels});
+    })
+  });
+
+
 
   app.get('/login',
   function(req, res){
     res.render('LoginPage.hbs');
   });
 
-  //takes in uid and password as post paramenters to login
+  //Takes in uid and password as post paramenters to login
   app.post('/login', 
   passport.authenticate('local',{ failureRedirect: '/login' }),
   function(req, res) {
