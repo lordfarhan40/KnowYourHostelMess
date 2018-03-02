@@ -62,6 +62,8 @@ app.get("/hostel",(req,res)=>
 		}
 		hostel.name=queryRep.name;
 		hostel.pde=queryRep.pde;
+		hostel.hid=queryRep.hid;		//Temp for image display
+		hostel.description=queryRep.description;
 		console.log(queryRep);
 		res.render("hostel.hbs",hostel);
 	});

@@ -35,28 +35,26 @@
   </div>
 </nav>
 
-{{#if user}}
-<div class="modal fade bg-dark" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-  style="position: absolute;top: 20%">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="login" method="post">
-          <div class="form-group" style="padding: 10px">
-            <input type="text" class="form-control" placeholder="Enter Username" name="uid">
-            <input type="password" class="form-control" placeholder="Enter Password" name="password" style="margin-top: 20px">
-            <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px">Login</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+ <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: absolute;top: 20%">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content bg-dark">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Login</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="login" method="post">
+                    <div class="form-group" style="padding: 10px">
+                      <input type="text" class="form-control" placeholder="Enter Username" name="uid">
+                      <input type="password" class="form-control" placeholder="Enter Password" name="password" style="margin-top: 20px">
+                       <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px">Login</button>
+                    </div>
 
-{{/if}}
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>

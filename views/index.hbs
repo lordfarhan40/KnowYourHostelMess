@@ -15,7 +15,7 @@
 
             {{#each hostel}}
             <div class="col-xm-12 col-md-4 col-lg-3 column shadow" style="padding: 0px; margin-top: 10px; margin-bottom: 10px;">
-             <a href="#">
+             <a href="/hostel?hid={{hostelId}}">
               <div class="container content" style="text-align: center; background-color: #DDDDDD">
                     <img src="images/hostels/{{hostelId}}.jpg" class="img-thumbnail" alt="Mountains" style="height: 150px; width: 100%;min-height: 150px">
                 <div>
@@ -32,29 +32,7 @@
           <!-- Modal for Login -->
           
 
-          <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: absolute;top: 20%">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content bg-dark">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Login</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="login" method="post">
-                    <div class="form-group" style="padding: 10px">
-                      <input type="text" class="form-control" placeholder="Enter Username" name="uid">
-                      <input type="password" class="form-control" placeholder="Enter Password" name="password" style="margin-top: 20px">
-                       <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px">Login</button>
-                    </div>
-
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
+         
 
 
 

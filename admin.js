@@ -165,6 +165,7 @@ function setUpRoutes(app){
   require('connect-ensure-login').ensureLoggedIn('/login'),
   (req, res) => {
     var hid=req.query.hid;
+    console.log(hid);
     hostels.getHostelById(hid,(err,hostelDetails)=>
     {
       res.render('EditHostel', {user: req.user,hostelDetails});
