@@ -160,6 +160,42 @@ function setUpRoutes(app){
   (req, res) => {
     res.render('EditProfile', {user: req.user});
   });
+
+  app.get('/EditHostel',
+  require('connect-ensure-login').ensureLoggedIn('/login'),
+  (req, res) => {
+    var hid=req.query.hid;
+    hostels.getHostelById(hid,(err,hostelDetails)=>
+    {
+      res.render('EditHostel', {user: req.user,hostelDetails});
+    });
+    
+  });
+
+  app.post('/EditHostel',
+  require('connect-ensure-login').ensureLoggedIn('/login'),
+  (req, res) => {
+    var name=req.body.name;
+    var description=req.body.description;
+    console.log(name);
+    console.log(description);
+    var image=req.files.image;
+    var hid=req.body.hid;
+    require('fs').unlink(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
+    {
+      image.mv(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
+      {
+        if(err)
+        {
+          console.log(err);
+          return res.send("Error");
+        }else{
+          return res.redirect("/");
+        }
+      });
+    });
+  });
+
 }
 
 module.exports={

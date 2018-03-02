@@ -9,6 +9,8 @@ const port = process.argv[2];
 const bodyParser = require('body-parser');
 const hostel = require('./models/hostels.js');
 const htmlGenerator = require('./utility/htmlGenerator.js');
+const fileUpload = require('express-fileupload');
+
 
 // Initial setup for node
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -16,7 +18,7 @@ var app = express();
 app.use(express.static(__dirname +'/public/'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname +'/views/partials/');
-
+app.use(fileUpload());
 /* 
 	Main Page will contain list of hostels and links for login
 */

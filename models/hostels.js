@@ -10,6 +10,34 @@ CREATE TABLE IF NOT EXISTS HOSTELS(
 )
 `;
 
+const editHostel=(hostelDetails,callback)=>
+{
+    if(hostelDetails===undefined||hostelDetails.hid===undefined){
+        return callback("Error: insufficient parameters.");
+    }
+    if(hostelDetails.name===undefined&&hostelDetails.description===undefined&&hostelDetails.pde===undefined)
+    {
+        return callback("Error: Nothing to change.");
+    }
+
+    var editHostelQuery=`UPDATE HOSTELS SET `;
+    if(hostelDetails.name!==undefined)
+    {
+        editHostelQuery=editHostelQuery+`name = ${hostelDetails.name},`;
+    }
+    if(hostelDetails.description!==undefined)
+    {
+        editHostelQuery=editHostelQuery+`description=${hostelDetails.description},`;
+    }
+    if(hostelDetails.pde!==undefined)
+    {
+        editHostelQuery=editHostelQuery+`pde=${hostelDetails.pde}`;
+    }
+
+    editHostelQuery=editHostelQuery+` where hid=${hostelDetails.hid}`;
+    connection.query(editHostelQuery,callback);
+}
+
 const createHostel=(hostelDetails,callback)=>
 {
     if(hostelDetails===undefined||hostelDetails.name===undefined)
@@ -49,7 +77,7 @@ const getHostelsList=(callback)=>
 const getHostelById=(id,callback)=>
 {
     const getHostelByIdQuery=`
-        SELECT hid,name,pde FROM HOSTELS WHERE hid=${id};
+        SELECT hid,name,pde,description FROM HOSTELS WHERE hid=${id};
     `;
     connection.query(getHostelByIdQuery,(err,res)=>
     {
