@@ -89,7 +89,7 @@ function setUpRoutes(app){
   require('connect-ensure-login').ensureLoggedIn('/login'),
   function(req, res){
     if(req.user.is_admin==0){
-      console.log('You are not the admin!.');
+      res.send('You are not the admin!.');
       return;
     }
     hostels.getHostelsList((err,hostels)=>
