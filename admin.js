@@ -3,6 +3,7 @@ var Strategy = require('passport-local').Strategy;
 const sha = require('sha256');
 const users = require('./models/users.js');
 const hostels=require('./models/hostels.js');
+const mess_bills=require('./models/mess_bills.js');
 
 // Configure the local strategy for use by Passport.
 //
@@ -197,7 +198,40 @@ function setUpRoutes(app){
       });
     });
   });
+  app.get("/UploadBill",(req,res)=>
+  {
+    var hid=req.query.hid;
+    hostels.getHostelById(hid,(err,hostelDetails)=>
+    {
+      res.render("UploadBill.hbs",{user:req.user,hostelDetails});
+    });
+  });
 
+  app.post("/UploadBill",(req,res)=>
+  {
+    var hid=req.body.hid;
+    var mess_bill=req.files.mess_bill;
+    var price=req.body.price;
+    var uid=req.user.uid;
+    var date=req.body.date;
+    var file=hid+uid+date;
+    var finalBill={
+      hid,
+      mess_bill,
+      price,
+      uid,
+      date,
+      file
+    };
+    mess_bill.mv(__dirname+'/public/bills/'+file+'.pdf',(err)=>
+    {
+      mess_bills.createMessBill(finalBill,(err)=>
+      {
+        console.log(err);
+        res.redirect("/");
+      });
+    });
+  });
 }
 
 module.exports={

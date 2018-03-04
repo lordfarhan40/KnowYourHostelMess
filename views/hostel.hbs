@@ -14,6 +14,13 @@
                     <h4>Per Day Expenses:  ₹{{hotsel.pde}}</h4>
                 </div>
             </div>
+            <table class="table">
+                <tr><td>Date</td><td>Price</td><td>Get it</td></tr>
+            {{#each mess_bills}}
+                <tr><td>{{date}}</td><td>{{price}}</td><td><a href="/bills/{{file}}.pdf" class="btn">Get it</a></td></tr>
+            {{/each}}
+            </table>
+            </table>
         </div>
         {{>footer}}
     </body>
