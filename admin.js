@@ -180,36 +180,53 @@ function setUpRoutes(app){
   (req, res) => {
     var name=req.body.name;
     var description=req.body.description;
-    console.log(name);
-    console.log(description);
     var image=req.files.image;
     var hid=req.body.hid;
-    require('fs').unlink(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
-    {
-      image.mv(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
+    var hostelDetails={
+      hid,
+      name,
+      description,
+    };
+    hostels.editHostel(hostelDetails,(err,reply)=>{
+      if(err)
+        return console.log(err);
+      if(image)
       {
-        if(err)
+        require('fs').unlink(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
         {
-          console.log(err);
-          return res.send("Error");
-        }else{
-          return res.redirect("/");
-        }
-      });
+          image.mv(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
+          {
+            if(err)
+            {
+              console.log(err);
+              return res.send("Error");
+            }else{
+              return res.redirect("/");
+            }
+          });
+        });
+      }else
+      {
+        return res.redirect("/");
+      }
     });
   });
-  app.get("/UploadBill",(req,res)=>
+  app.get("/UploadBill",
+  require('connect-ensure-login').ensureLoggedIn('/login'),
+  (req,res)=>
   {
-    var hid=req.query.hid;
+    var hid=req.user.hostel_id;
     hostels.getHostelById(hid,(err,hostelDetails)=>
     {
       res.render("UploadBill.hbs",{user:req.user,hostelDetails});
     });
   });
 
-  app.post("/UploadBill",(req,res)=>
+  app.post("/UploadBill",
+  require('connect-ensure-login').ensureLoggedIn('/login'),
+  (req,res)=>
   {
-    var hid=req.body.hid;
+    var hid=req.user.hostel_id;
     var mess_bill=req.files.mess_bill;
     var price=req.body.price;
     var uid=req.user.uid;

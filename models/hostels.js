@@ -23,17 +23,17 @@ const editHostel=(hostelDetails,callback)=>
     var editHostelQuery=`UPDATE HOSTELS SET `;
     if(hostelDetails.name!==undefined)
     {
-        editHostelQuery=editHostelQuery+`name = ${hostelDetails.name},`;
+        editHostelQuery=editHostelQuery+`name = \"${hostelDetails.name}\",`;
     }
     if(hostelDetails.description!==undefined)
     {
-        editHostelQuery=editHostelQuery+`description=${hostelDetails.description},`;
+        editHostelQuery=editHostelQuery+`description=\"${hostelDetails.description}\",`;
     }
     if(hostelDetails.pde!==undefined)
     {
-        editHostelQuery=editHostelQuery+`pde=${hostelDetails.pde}`;
+        editHostelQuery=editHostelQuery+`pde=${hostelDetails.pde},`;
     }
-
+    editHostelQuery=editHostelQuery.slice(0, -1);
     editHostelQuery=editHostelQuery+` where hid=${hostelDetails.hid}`;
     connection.query(editHostelQuery,callback);
 }
@@ -89,5 +89,6 @@ const getHostelById=(id,callback)=>
 module.exports={
     createHostel,
     getHostelsList,
-    getHostelById
+    getHostelById,
+    editHostel
 }
