@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+  {{>header}}
+<body>
+  <style type="text/css">
+    /* Style the tab */
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+    }
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+    }
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+  </style>
+  {{>nav}}
+
+  <div class="container">
+    <div class="col-lg-10" style="margin: 0 auto; padding: 0 auto;margin-top: 30px;">
+      
+      <div class="tab bg-dark">
+        <button class="tablinks" onclick="openTab(event, 'notifications')">Notifications</button>
+        <button class="tablinks" onclick="openTab(event, 'uploadBills')">Bills</button>
+        <button class="tablinks" onclick="openTab(event, 'blank')">blank</button>
+      </div>
+      <div id="notifications" class="tabcontent">
+        <form >
+          <h3>Notification</h3>
+          <input type="text" name="text_to_notify" placeholder="Enter Notifications" class="form-control"><br>
+          <button class="form-control" type="submit">Send Notification</button>
+        </form>
+      </div>
+      <div id="uploadBills" class="tabcontent">
+        <div class="container">
+          <div class="row">
+            <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12" style="margin: 0 auto; padding: 0 auto;">
+              <form class="jumbotron shadow" action="/UploadBill" method="post" encType="multipart/form-data">
+                <h1>{{hostelDetails.name}}</h1><br>
+                <input type="hidden" name="hid" value="{{hostelDetails.hid}}"/>
+                <input type="file" class="col-lg-12 col-md-12 col-sm-12 col-xm-12 btn btn-secondary form-control shadow" style="margin-top: 5px;" name="mess_bill">
+                <br><b>Mess Bill Price</b><input type="number" class="form-control" placeholder="Enter total mess bill." value="0" name="price"><br>
+                <b>Mess Bill Date</b><input type="date" class="form-control" placeholder="Mess Bill Date" name="date"><br>
+                <button type="submit" class="form-control btn btn-primary shadow">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="blank", class="tabcontent">
+        blank
+      </div>
+  </div>
+
+<!-- Tab content -->
+  {{footer}}
+  <script type="text/javascript">
+    function openTab(evt, tabName) {
+    // Declare all variables
+      var i, tabcontent, tablinks;
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  </script>
+</body>
+</html>

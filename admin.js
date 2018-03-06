@@ -232,6 +232,12 @@ function setUpRoutes(app){
       });
     });
   });
+  app.get('/Manage', require('connect-ensure-login').ensureLoggedIn('/login'),
+  (req, res) => {
+    res.render('HostelMenu', {user: req.user});
+  });
+
+
 }
 
 module.exports={
