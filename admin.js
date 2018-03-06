@@ -209,7 +209,7 @@ function setUpRoutes(app){
 
   app.post("/UploadBill",(req,res)=>
   {
-    var hid=req.body.hid;
+    var hid=req.user.hostel_id;
     var mess_bill=req.files.mess_bill;
     var price=req.body.price;
     var uid=req.user.uid;
