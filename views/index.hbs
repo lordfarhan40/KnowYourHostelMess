@@ -4,8 +4,6 @@
   <body background="/images/background.jpg">
     {{>nav}}
       <div class="main">
-
-          
           <hr>
           
           <h2>HOSTELS</h2>
@@ -24,19 +22,12 @@
                 </div>
               </div>
               </a>
+              {{#if ../user.is_admin}}<p class="text-center"><a href="/EditHostel?hid={{hostelId}}">Edit</a></p>{{/if}}
             </div>
             {{/each}}
           <!-- END GRID -->
           </div>
-
-
           <!-- Modal for Login -->
-          
-
-         
-
-
-
         {{>footer}}
   </body>
 </html>

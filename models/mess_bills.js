@@ -19,22 +19,30 @@ const createMessBill=(messBill,callback)=>
         return;
     }
 
-    const createMessBillQuery=`
-        INSERT INTO MESSBILLS VALUES(hid,date,file,price,uid)
-        VALUES(
-            ${messBill.hid},
-            \"${messBill.date}\",
-            \"${file}\",
-            ${price},
-            \"${uid}\"
-        )
-    `;
+    const createMessBillQuery=`INSERT INTO MESSBILLS(uid,hid,date,file,price) VALUES(
+        \"${messBill.uid}\",
+        ${messBill.hid},
+        \"${messBill.date}\",
+        \"${messBill.file}\",
+        ${messBill.price}
+    )`;
 
     connection.query(createMessBillQuery,callback);
+};
+
+const getBillsByHid=(hid,callback)=>
+{
+    if(hid===undefined)
+        return callback("HID not defined.");
+    const getBillsByHidQuery=`
+        SELECT * FROM MESSBILLS WHERE hid=${hid};
+    `;
+    connection.query(getBillsByHidQuery,callback);
 };
 
 
 
 module.exports={
-    createMessBill
+    createMessBill,
+    getBillsByHid
 }

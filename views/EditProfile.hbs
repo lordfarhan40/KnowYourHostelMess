@@ -14,9 +14,16 @@
 					</div>
 
 						<button class="col-lg-3 col-md-3 col-sm-3 col-xm-1 btn btn-secondary form-control shadow" style="margin-top: 5px;">Upload Image</button>
-				</div>
-				<b>Name</b><input type="text" class="form-control" placeholder="Enter Name" value="Sample Username" name="username"><br>
-				<b>Password</b><input type="password" class="form-control" placeholder="Password" value="1234567890" name="password"><br>
+					</div>
+				<b>Name</b><input type="text" class="form-control" placeholder="Enter Name" value="{{user.name}}" name="name"><br>
+				<b>Contact Number</b>
+				<div class="input-group mb-2">
+					<div class="input-group-prepend">
+					<div class="input-group-text">+91</div>
+					</div>
+					<input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Contact Number">
+				</div>				
+	  			<b>Password</b><input type="password" class="form-control" placeholder="Password" value="1234567890" name="password"><br>
 				<b>Confirm Password</b><input type = "password" class="form-control" placeholder="Confirm Password" value="1234567890" name="confirmPassword"><br>
 				<button type="submit" class="form-control btn btn-primary shadow">Submit</button>
 				</form>

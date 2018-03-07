@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const hostel = require('./models/hostels.js');
 const htmlGenerator = require('./utility/htmlGenerator.js');
 const fileUpload = require('express-fileupload');
-
+const mess_bills=require('./models/mess_bills.js');
 
 // Initial setup for node
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -65,9 +65,15 @@ app.get("/hostel",(req,res)=>
 		hostel.hid=queryRep.hid;		//Temp for image display
 		hostel.description=queryRep.description;
 		console.log(queryRep);
-		res.render("hostel.hbs",{
-			hostel,
-			user: req.user});
+		mess_bills.getBillsByHid(hostelId,(err,bills)=>
+		{
+			console.log(err);
+			res.render("hostel.hbs",{
+				hostel,
+				user: req.user,
+				mess_bills:bills
+			});
+		});
 	});
 });
 
