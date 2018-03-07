@@ -29,6 +29,7 @@ app.get('/', (request, response) => {
 	//Getting hostel list from database
 	hostel.getHostelsList((error, result) => {
 		if(error !== undefined) 
+			console.log('Error in database');
 		else {
 			console.log(`${result.length} Hostels found in database`);
 			/* 
@@ -64,7 +65,7 @@ app.get("/hostel",(req,res)=>
 		hostel.pde=queryRep.pde;
 		hostel.hid=queryRep.hid;		//Temp for image display
 		hostel.description=queryRep.description;
-		console.log(queryRep);
+		//console.log(queryRep);
 		mess_bills.getBillsByHid(hostelId,(err,bills)=>
 		{
 			console.log(err);
