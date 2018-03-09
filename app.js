@@ -19,6 +19,12 @@ var app = express();
 app.use(express.static(__dirname +'/public/'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname +'/views/partials/');
+hbs.registerHelper('ifCond', function(v1, v2, options) {
+  if(v1 === v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 app.use(fileUpload());
 /* 
 	Main Page will contain list of hostels and links for login
@@ -98,9 +104,10 @@ app.get('/notifications', (request, response) => {
 			console.log(error);
 			response.send(error);
 		}
+		console.log('Yaha pahuch gaye' +request.query);
 		response.render('notifications', { 
 			user:request.user,
-			topNotifications,
+			topNotifications
 		});
 	});
 });

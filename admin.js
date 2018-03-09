@@ -4,6 +4,7 @@ const sha = require('sha256');
 const users = require('./models/users.js');
 const hostels=require('./models/hostels.js');
 const mess_bills=require('./models/mess_bills.js');
+const utility = require('./utility/utility.js');
 
 // Configure the local strategy for use by Passport.
 //
@@ -255,6 +256,27 @@ function setUpRoutes(app){
     }) 
   });
 
+  app.post('/addNotification', require('connect-ensure-login').ensureLoggedIn('/login'),(req, res) => {
+   
+    utility.addNotification(req.user, req.body, (error, result) => {
+      if(error)
+        console.log(error);
+      else
+        console.log(result);
+      res.redirect('/manage');
+    })
+  });
+
+  app.post('/deleteNotification', require('connect-ensure-login').ensureLoggedIn('/login'), (req, res) => {
+    utility.removeNotification(req.body.nid, (error, result) => {
+      if(error) {
+        res.send(error);
+        console.log(error);
+      }
+      else
+        res.redirect('/notifications?hid=' +req.user.hostel_id);
+    });
+  });
 
 }
 

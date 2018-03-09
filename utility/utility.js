@@ -28,6 +28,46 @@ var getNotifications = (hid, count, callback) => {
 	}
 }
 
+var addNotification = (user, body, callback) => {
+	if(!user) {
+		callback('User is Not Defined');
+		return;
+	}
+	else if(!body) {
+		callback('Notification is not specified');
+		return;
+	}
+
+	var notificationObject = {
+      uid: user.hid,
+      hid: user.hostel_id,
+      title: body.notificationTitle,
+      text: body.notificationText,
+      date: new Date().toISOString().slice(0, 19).replace('T', ' ')
+    };
+
+    notifications.createNotification(notificationObject, (error, result) => {
+    	if(error)
+    		callback(error);
+    	else
+    		callback(undefined, result);
+    });
+}
+
+var removeNotification = (nid, callback) => {
+	if(!nid)
+		callback('Notification Not specified');
+	else
+		notifications.removeNotificationByNid(nid, (error, result) => {
+			if(error)
+				callback(error);
+			else
+				callback(undefined, result);
+		})
+}
+
 module.exports = {
-	getNotifications
+	getNotifications,
+	addNotification,
+	removeNotification
 }

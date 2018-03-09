@@ -73,10 +73,19 @@
         <button class="tablinks" onclick="openTab(event, 'changePDE')">Change PDE</button>
       </div>
       <div id="notifications" class="tabcontent">
-        <form >
-          <h3>Notification</h3>
-          <input type="text" name="text_to_notify" placeholder="Enter Notifications" class="form-control"><br>
-          <button class="form-control" type="submit">Send Notification</button>
+        <form action="/addNotification" method="post">
+          <h3>Add Notification</h3>
+          <div class="row jumbotron" style="margin-top: 16px;">
+            <div class="col-lg-4">
+              <p>Title:</p>
+              <input type="text" name="notificationTitle" class="form-control" placeholder="Title" maxlength="20">   
+            </div>
+            <div class="col-lg-7">
+              <p>Notification</p>
+              <textarea class="form-control" name="notificationText" placeholder="Enter Notification to send here"></textarea>
+            </div>
+            <button class="form-control btn btn-primary" type="submit" style="margin-top: 8px;">Add</button>
+          </div>
         </form>
       </div>
       <div id="uploadBills" class="tabcontent">

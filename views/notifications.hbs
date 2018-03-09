@@ -3,12 +3,19 @@
 {{>header}}
 <body>
     {{>nav}}
-    <div class="col-lg-12 bg-dark" style="color: white;padding-left: 50px; padding-top: 16px;padding-right: 50px; padding-bottom: 16px;margin-top: 50px; margin-bottom: 30px;">
-      <h3 align="center">Notifications</h3>
-      <hr style="border-color: white; border-width: 3px;">
-      {{#each topNotifications}}
-      <h5>{{title}}:</h5>
-      <p style="font-size: 14px;">{{text}}</p>
+      <div class="col-lg-10 bg-dark" style="color: white;padding-left: 50px; padding-top: 16px;padding-right: 50px; padding-bottom: 16px;margin-top: 50px; margin-bottom: 30px;">
+        <h3 align="center">Notifications</h3>
+        <hr style="border-color: white; border-width: 3px;">
+        {{#each topNotifications}}
+        <h5>{{title}}:</h5>
+        <p style="font-size: 14px;">{{text}}</p>
+        
+      {{#ifCond hid ../user.hostel_id}}
+        <form action="/deleteNotification" method="post">
+          <input type="hidden" name="nid" value="{{nid}}">
+          <button class="btn btn-danger" style="margin-left: 80px;">Delete</button>
+        </form>
+      {{/ifCond}}
       <hr style="border-color: white; border-width: 2px;">
       {{/each}}
     </div>
