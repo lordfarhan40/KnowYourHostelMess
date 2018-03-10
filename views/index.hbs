@@ -1,32 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+
   {{>header}}
+
+
+  
   <body background="/images/background.jpg">
     {{>nav}}
       <div class="main">
           <hr>
-          
           <h2>HOSTELS</h2>
-                   
-         
           <div class="row bg-dark">
 
             {{#each hostel}}
             <div class="col-xm-12 col-md-4 col-lg-3 column shadow" style="padding: 0px; margin-top: 10px; margin-bottom: 10px;">
              <a href="/hostel?hid={{hostelId}}">
               <div class="container content" style="text-align: center; background-color: #DDDDDD">
-                    <img src="images/hostels/{{hostelId}}.jpg" class="img-thumbnail" alt="Mountains" style="height: 150px; width: 100%;min-height: 150px">
+                  <img src="images/hostels/{{hostelId}}.jpg" class="img-thumbnail" alt="Mountains" style="height: 150px; width: 100%;min-height: 150px">
                 <div>
                   <p><h5>{{hostelName}}</h5></p>    
                 </div>
               </div>
               </a>
-              {{#if ../user.is_admin}}<p class="text-center"><a href="/EditHostel?hid={{hostelId}}">Edit</a></p>{{/if}}
+              {{#if ../user.is_admin}}<p class="text-center"><a href="/EditHostel?hid={{hostelId}}">Edit <img src="/images/image_edit.png"></a></p>{{/if}}
+              
             </div>
             {{/each}}
           <!-- END GRID -->
           </div>
           <!-- Modal for Login -->
         {{>footer}}
+        
   </body>
 </html>
