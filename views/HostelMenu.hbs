@@ -37,20 +37,55 @@
     }
   </style>
   {{>nav}}
-
-  <div class="container">
-    <div class="col-lg-10" style="margin: 0 auto; padding: 0 auto;margin-top: 30px;">
+  <h2 align="center" style="margin-top: 16px;">{{hostelDetails.name}}</h2>
+  <div class="container shadow-nohover">
+    <div class="row">
+      <div class="col-xm-12 col-sm-12 col-md-8 col-lg-4 bg-dark shadow-nohover" style="margin:0 auto; padding: 0 auto;color: white; margin-top: 30px;height: 430px;">
+        <h4 align="center" style="padding-top: 8px">Know your mess</h4>
+          <hr style="border-color: #000000; border-width: 1px;">
+        <div>
+          <h5>Current month's</h5>
+          <ul>
+            <li><b>Per day cost: ₹</b>200</li>
+            <li><b>Total expanses: ₹</b>750000</li>
+            <li><b>Running days: </b>21</li>
+          </ul>
+          <h5>Previous month's</h5>
+          <ul>
+            <li><b>Per day cost: ₹</b>200</li>
+            <li><b>Total expanses: ₹</b>750000</li>
+            <li><b>Running days: </b>21</li>
+          </ul>
+          <h5>This Sessions</h5>
+          <ul>
+            <li><b>Avg. Per day cost: ₹</b>200</li>
+            <li><b>Total expanses: ₹</b>750000</li>
+            <li><b>Running days: </b>21</li>
+          </ul>
+        </div>
+    </div>
+    <div class="col-xm-12 col-sm-12 col-md-10 col-lg-7 shadow-nohover" style="margin: 0 auto; padding: 0 auto;margin-top: 30px;">
       
       <div class="tab bg-dark">
         <button class="tablinks" onclick="openTab(event, 'notifications')">Notifications</button>
         <button class="tablinks" onclick="openTab(event, 'uploadBills')">Bills</button>
-        <button class="tablinks" onclick="openTab(event, 'blank')">blank</button>
+        <button class="tablinks" onclick="openTab(event, 'messMenu')">Edit Mess Menu</button>
+        <button class="tablinks" onclick="openTab(event, 'changePDE')">Change PDE</button>
       </div>
       <div id="notifications" class="tabcontent">
-        <form >
-          <h3>Notification</h3>
-          <input type="text" name="text_to_notify" placeholder="Enter Notifications" class="form-control"><br>
-          <button class="form-control" type="submit">Send Notification</button>
+        <form action="/addNotification" method="post">
+          <h3>Add Notification</h3>
+          <div class="row jumbotron" style="margin-top: 16px;">
+            <div class="col-lg-4">
+              <p>Title:</p>
+              <input type="text" name="notificationTitle" class="form-control" placeholder="Title" maxlength="20">   
+            </div>
+            <div class="col-lg-7">
+              <p>Notification</p>
+              <textarea class="form-control" name="notificationText" placeholder="Enter Notification to send here"></textarea>
+            </div>
+            <button class="form-control btn btn-primary" type="submit" style="margin-top: 8px;">Add</button>
+          </div>
         </form>
       </div>
       <div id="uploadBills" class="tabcontent">
@@ -58,7 +93,6 @@
           <div class="row">
             <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12" style="margin: 0 auto; padding: 0 auto;">
               <form class="jumbotron shadow" action="/UploadBill" method="post" encType="multipart/form-data">
-                <h1>{{hostelDetails.name}}</h1><br>
                 <input type="hidden" name="hid" value="{{hostelDetails.hid}}"/>
                 <input type="file" class="col-lg-12 col-md-12 col-sm-12 col-xm-12 btn btn-secondary form-control shadow" style="margin-top: 5px;" name="mess_bill">
                 <br><b>Mess Bill Price</b><input type="number" class="form-control" placeholder="Enter total mess bill." value="0" name="price"><br>
@@ -70,11 +104,74 @@
         </div>
       </div>
 
-      <div id="blank", class="tabcontent">
-        blank
+      <div id="messMenu", class="tabcontent">
+        <form>
+          <table class="table table-responsive table-dark">
+          <tr>
+            <th>Day</th>
+            <th>Breakfast</th>
+            <th>Lunch</th>
+            <th>Snacks</th>
+            <th>Dinner</th>
+          </tr>
+          <tr>
+            <td>Monday</td>
+            <td><input class="form-control" type="text" name="monBreakfast" placeholder="Breakfast"></td>
+            <td><input class="form-control" type="text" name="monLunch" placeholder="Lunch"></td>
+            <td><input class="form-control" type="text" name="monSnacks" placeholder="Snacks" value="N/A"></td>
+            <td><input class="form-control" type="text" name="monDinner" placeholder="Dinner"></td>
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td><input class="form-control" type="text" name="tueBreakfast" placeholder="Breakfast"></td>
+            <td><input class="form-control" type="text" name="tueLunch" placeholder="Lunch"></td>
+            <td><input class="form-control" type="text" name="tueSnacks" placeholder="Snacks" value="N/A"></td>
+            <td><input class="form-control" type="text" name="tueDinner" placeholder="Dinner"></td>
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td><input class="form-control" type="text" name="wedBreakfast" placeholder="Breakfast"></td>
+            <td><input class="form-control" type="text" name="wedLunch" placeholder="Lunch"></td>
+            <td><input class="form-control" type="text" name="wedSnacks" placeholder="Snacks" value="N/A"></td>
+            <td><input class="form-control" type="text" name="wedDinner" placeholder="Dinner"></td>
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td><input class="form-control" type="text" name="thuBreakfast" placeholder="Breakfast"></td>
+            <td><input class="form-control" type="text" name="thuLunch" placeholder="Lunch"></td>
+            <td><input class="form-control" type="text" name="thuSnacks" placeholder="Snacks" value="N/A"></td>
+            <td><input class="form-control" type="text" name="thuDinner" placeholder="Dinner"></td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td><input class="form-control" type="text" name="friBreakfast" placeholder="Breakfast"></td>
+            <td><input class="form-control" type="text" name="friLunch" placeholder="Lunch"></td>
+            <td><input class="form-control" type="text" name="friSnacks" placeholder="Snacks" value="N/A"></td>
+            <td><input class="form-control" type="text" name="friDinner" placeholder="Dinner"></td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td><input class="form-control" type="text" name="satBreakfast" placeholder="Breakfast"></td>
+            <td><input class="form-control" type="text" name="satLunch" placeholder="Lunch"></td>
+            <td><input class="form-control" type="text" name="satSnacks" placeholder="Snacks" value="N/A"></td>
+            <td><input class="form-control" type="text" name="satDinner" placeholder="Dinner"></td>
+          </tr>
+          <tr>
+            <td>Sunday</td>
+            <td><input class="form-control" type="text" name="sunBreakfast" placeholder="Breakfast"></td>
+            <td><input class="form-control" type="text" name="sunLunch" placeholder="Lunch"></td>
+            <td><input class="form-control" type="text" name="sunSnacks" placeholder="Snacks" value="N/A"></td>
+            <td><input class="form-control" type="text" name="sunDinner" placeholder="Dinner"></td>
+          </tr>
+        </table>
+        <button class="btn btn-primary form-control" type="submit">Submit</button>
+        </form>
+      </div>
+      <div id="changePDE", class="tabcontent">
+        Blank
       </div>
   </div>
-
+    </div>
 <!-- Tab content -->
   {{footer}}
   <script type="text/javascript">

@@ -81,7 +81,8 @@ const getHostelById=(id,callback)=>
     `;
     connection.query(getHostelByIdQuery,(err,res)=>
     {
-        console.log(err,res);
+        if(err)
+            console.log(err);
         callback(err,res[0]);
     });
 };

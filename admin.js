@@ -4,6 +4,7 @@ const sha = require('sha256');
 const users = require('./models/users.js');
 const hostels=require('./models/hostels.js');
 const mess_bills=require('./models/mess_bills.js');
+const utility = require('./utility/utility.js');
 
 // Configure the local strategy for use by Passport.
 //
@@ -102,7 +103,6 @@ function setUpRoutes(app){
   app.get('/create_hostel',
   require('connect-ensure-login').ensureLoggedIn('/login'),
   function(req, res){
-    console.log('Admin Status in database: ', req.user.is_admin);
     if(req.user.is_admin==0){
       res.send("You are not the admin!.");
       return;
@@ -140,7 +140,6 @@ function setUpRoutes(app){
 
   app.get('/login',
   function(req, res){
-    console.log(req.user);
     res.render('LoginPage.hbs');
   });
 
@@ -167,7 +166,8 @@ function setUpRoutes(app){
   require('connect-ensure-login').ensureLoggedIn('/login'),
   (req, res) => {
     var hid=req.query.hid;
-    console.log(hid);
+    if(hid === undefined)
+      console.log('Hid is undefined in /EditHostel request');
     hostels.getHostelById(hid,(err,hostelDetails)=>
     {
       res.render('EditHostel', {user: req.user,hostelDetails});
@@ -251,9 +251,32 @@ function setUpRoutes(app){
   });
   app.get('/Manage', require('connect-ensure-login').ensureLoggedIn('/login'),
   (req, res) => {
-    res.render('HostelMenu', {user: req.user});
+    hostels.getHostelById(req.user.hostel_id, (err, hostelDetails) => {
+      res.render('HostelMenu', {user: req.user, hostelDetails});
+    }) 
   });
 
+  app.post('/addNotification', require('connect-ensure-login').ensureLoggedIn('/login'),(req, res) => {
+   
+    utility.addNotification(req.user, req.body, (error, result) => {
+      if(error)
+        console.log(error);
+      else
+        console.log(result);
+      res.redirect('/manage');
+    })
+  });
+
+  app.post('/deleteNotification', require('connect-ensure-login').ensureLoggedIn('/login'), (req, res) => {
+    utility.removeNotification(req.body.nid, (error, result) => {
+      if(error) {
+        res.send(error);
+        console.log(error);
+      }
+      else
+        res.redirect('/notifications?hid=' +req.user.hostel_id);
+    });
+  });
 
 }
 
