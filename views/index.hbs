@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!-- <!DOCTYPE html>
 
   {{>header}}
 
@@ -50,4 +50,111 @@
     <!-- Modal for Login -->
   {{>footer}}
   </body>
+</html> --}}
+
+
+<!DOCTYPE html>
+ {{>header}}
+
+
+
+<body>
+ 
+  <div class="wrapper ">
+     
+    <div class="main-panel" style="width: 100%;">
+       {{>nav}}
+      <div class="content">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Notifications</h4>
+              </div>
+               {{#each topNotifications}}
+                <div class="card-body">
+                  <div class="alert alert-info">
+                    <span>
+                      <b>{{title}} </b>
+                      <br>{{text}}</span>
+                    <br>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <b>10-03-2018</b>
+                      </div>
+                      <div class="col-lg-6" style="text-align: right;">
+                        --Mohsin
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{/each}}
+              <div style="text-align: right;margin-right: 18px;margin-bottom: 16px;">
+                <a href="/notifications">View all</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xm-12 col-lg-8">
+            <div class="row">
+              {{#each hostel}}
+                <div class="col-xs-4 col-lg-4 col-md-6">
+                    <div class="card card-chart">
+                      <div class="card-header">
+                        <div class="row">
+                          <div class="col-lg-10">
+                            <a href="/hostel?hid={{hostelId}}">
+                              <h4 class="card-title"> {{hostelName}}</h4>
+                            </a>
+                          </div>
+                          <div class="col-lg-1" style="padding-top: 8px;">
+                            {{#if ../user.is_admin}}
+                            <p class="text-right">
+                              <a href="/EditHostel?hid={{hostelId}}">
+                                <i class="now-ui-icons ui-1_settings-gear-63"></i>
+                              </a>
+                            </p>
+                            {{/if}}</div>
+                        </div>
+                      <a href="/hostel?hid={{hostelId}}">
+                         <img class="card-img-top" src="images/hostels/{{hostelId}}.jpg" alt="Card image cap" >
+                       </a>
+                      </div>
+                      <div class="card-footer">
+                        <div class="stats">
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal for Login -->
+  {{>footer}}
+</body>
+
+
+<script src=" js/core/jquery.min.js"></script>
+<script src=" js/core/popper.min.js"></script>
+<script src=" js/core/bootstrap.min.js"></script>
+<script src=" js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src=" js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src=" js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src=" js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src=" demo/demo.js"></script>
+<script>
+  $(document).ready(function () {
+    // Javascript method's body can be found in public/js/demos.js
+    demo.initDashboardPageCharts();
+  });
+</script>
 </html>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+{{!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">
     <img src="images/logo.png" width="60px" height="70px" style="margin-right: 10px;margin-left:10px">Motilal Nehru National Institute of Technology
   </a>
@@ -33,28 +33,92 @@
       </ul>
     {{/if}}
   </div>
-</nav>
+</nav> --}}
 
- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: absolute;top: 20%">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content bg-dark">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Login</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form action="login" method="post">
-                    <div class="form-group" style="padding: 10px">
-                      <input type="text" class="form-control" placeholder="Enter Username" name="uid">
-                      <input type="password" class="form-control" placeholder="Enter Password" name="password" style="margin-top: 20px">
-                       <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px">Login</button>
-                    </div>
+ 
 
-                  </form>
+
+{{!-- New nav Baar --}}
+
+
+  <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <div class="navbar-toggle">
+          <button type="button" class="navbar-toggler">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+          </button>
+        </div>
+        <a class="navbar-brand" href="#pablo">
+          <img src="images/logo.png" style="width:100px;height:100px;margin-top: 50px;margin-left:50px;">
+        </a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
+         {{#if user}}
+          <ul class="navbar-nav">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      Hi, {{user.name}}
+                    </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/EditProfile">Edit Profile</a>
+                    <a class="dropdown-item" href="/Manage">Management</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                  </div>
                 </div>
-              </div>
+          </ul>
+        {{else}}
+        <ul class="navbar-nav">
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="modal" data-target="#loginModal">
+              Login
+            </button>
+          </div>
+        </ul>
+        {{/if}}
+      </div>
+    </div>
+  </nav>
+  <div class="panel-header" style="height:300px;">
+    <div class="header text-center">
+      <h2 class="title">Motilal Nehru National Institute Of Technology</h2>
+      <p class="category">Allahabad 211004
+      </p>
+    </div>
+  </div>
+
+  {{!-- Modal --}}
+
+
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    style="position: absolute;top: 20%">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="login" method="post">
+            <div class="form-group" style="padding: 10px">
+              <input type="text" class="form-control" placeholder="Enter Username" name="uid">
+              <input type="password" class="form-control" placeholder="Enter Password" name="password" style="margin-top: 20px">
+              <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px">Login</button>
             </div>
-          </div>
-          </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

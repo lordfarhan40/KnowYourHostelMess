@@ -57,3 +57,7 @@
   max-width: 530px;
   margin: 0 auto;
 }
+.edit-icon{
+      content:"\f101";
+      font-family:"Ionicons";
+    }
