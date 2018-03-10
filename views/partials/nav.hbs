@@ -1,43 +1,3 @@
-{{!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">
-    <img src="images/logo.png" width="60px" height="70px" style="margin-right: 10px;margin-left:10px">Motilal Nehru National Institute of Technology
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <!-- add with your own action -->
-    </ul>
-    {{#if user}}
-      <ul class="navbar-nav mr-right" style="margin-right: 50px">
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Hi, {{user.name}}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/EditProfile">Edit Profile</a>
-          <a class="dropdown-item" href="/Manage">Management</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/logout">Logout</a>
-        </div>
-      </li>
-      </ul>
-    {{else}}
-      <ul class="navbar-nav mr-right" style="margin-right: 50px">
-        <li class="nav-item dropdown">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
-        </li>
-      </ul>
-    {{/if}}
-  </div>
-</nav> --}}
-
- 
-
-
 {{!-- New nav Baar --}}
 
 
@@ -51,7 +11,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href="#pablo">
+        <a class="navbar-brand" href="/">
           <img src="images/logo.png" style="width:100px;height:100px;margin-top: 50px;margin-left:50px;">
         </a>
       </div>
@@ -79,7 +39,7 @@
         {{else}}
         <ul class="navbar-nav">
           <div class="dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="modal" data-target="#loginModal">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#loginModal">
               Login
             </button>
           </div>
@@ -91,8 +51,7 @@
   <div class="panel-header" style="height:300px;">
     <div class="header text-center">
       <h2 class="title">Motilal Nehru National Institute Of Technology</h2>
-      <p class="category">Allahabad 211004
-      </p>
+      <p class="category">Allahabad 211004</p>
     </div>
   </div>
 
@@ -102,7 +61,7 @@
   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
     style="position: absolute;top: 20%">
     <div class="modal-dialog" role="document">
-      <div class="modal-content bg-dark">
+      <div class="modal-content " style="background-color:#1e3d60">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Login</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -114,7 +73,7 @@
             <div class="form-group" style="padding: 10px">
               <input type="text" class="form-control" placeholder="Enter Username" name="uid">
               <input type="password" class="form-control" placeholder="Enter Password" name="password" style="margin-top: 20px">
-              <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px">Login</button>
+              <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px; color:bisque;">Login</button>
             </div>
   
           </form>

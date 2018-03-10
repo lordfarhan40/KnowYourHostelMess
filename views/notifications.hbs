@@ -2,22 +2,45 @@
 <html>
 {{>header}}
 <body>
+  <div class="wrapper ">
+    <div class="main-panel" style="width: 100%;">
     {{>nav}}
-      <div class="col-lg-10 bg-dark" style="color: white;padding-left: 50px; padding-top: 16px;padding-right: 50px; padding-bottom: 16px;margin-top: 50px; margin-bottom: 30px;">
-        <h3 align="center">Notifications</h3>
-        <hr style="border-color: white; border-width: 3px;">
+    <div class="content">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Notifications</h4>
+        </div>
         {{#each topNotifications}}
-        <h5>{{title}}:</h5>
-        <p style="font-size: 14px;">{{text}}</p>
-        
-      {{#ifCond hid ../user.hostel_id}}
-        <form action="/deleteNotification" method="post">
-          <input type="hidden" name="nid" value="{{nid}}">
-          <button class="btn btn-danger" style="margin-left: 80px;">Delete</button>
-        </form>
-      {{/ifCond}}
-      <hr style="border-color: white; border-width: 2px;">
-      {{/each}}
+        <div class="card-body">
+          <div class="alert alert-info">
+            <span>
+              <b>{{title}} </b>
+              <br>{{text}}</span>
+            <br>
+            <div class="row">
+              <div class="col-lg-6">
+                <b>10-03-2018</b>
+              </div>
+              <div class="col-lg-6" style="text-align: right;">
+                --Mohsin
+              </div>
+            </div>
+             {{#ifCond hid ../user.hostel_id}}
+            <form action="/deleteNotification" method="post">
+            <input type="hidden" name="nid" value="{{nid}}">
+              <button type="submit" aria-hidden="true" class="close danger" style="border-radius: 4px; background-color:red">
+                <i class="now-ui-icons ui-1_simple-remove"></i>
+              </button>
+            </form>
+            {{/ifCond}}
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    </div>
+    </div>
     </div>
     {{>footer}}
 </body>

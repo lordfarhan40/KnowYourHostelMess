@@ -1,70 +1,11 @@
-{{!-- <!DOCTYPE html>
-
-  {{>header}}
-
-
-  
-  <body background="/images/background.jpg">
-    {{>nav}}
-    <div class="main">
-      <hr>
-      <div class="row">
-        <div class="col-lg-3 bg-dark" style="color: white">
-          <h3 align="center">Notifications</h3>
-          <hr style="border-color: white; border-width: 3px;">
-          {{#each topNotifications}}
-          <h5>{{title}}:</h5>
-          <p style="font-size: 14px;">{{text}}</p>
-          <hr style="border-color: white; border-width: 2px;">
-          {{/each}}
-          <a href="/notifications?hid=0">View all</a>
-        </div>
-        <div class="col-lg-8">
-          <h2>HOSTELS</h2>
-          <div class="row bg-dark">
-            {{#each hostel}}
-            <div class="col-xm-12 col-md-4 col-lg-3 column shadow" style="padding: 0px; margin-top: 10px; margin-bottom: 10px;">
-              <a href="/hostel?hid={{hostelId}}">
-                <div class="container content" style="text-align: center; background-color: #DDDDDD">
-                  <img src="images/hostels/{{hostelId}}.jpg" class="img-thumbnail" alt="Mountains" style="height: 150px; width: 100%;min-height: 150px">
-                  <div>
-                    <p><h5>{{hostelName}}</h5></p>    
-                  </div>
-                </div>
-              </a>
-            
-              {{#if ../user.is_admin}}
-              <p class="text-center">
-                <a href="/EditHostel?hid={{hostelId}}">
-                 <i class="icon ion-ios-compose"></i>
-                </a>
-              </p>
-              {{/if}}
-            </div>
-            {{/each}}
-          <!-- END GRID -->
-          </div>  
-        </div>  
-      </div>
-    </div>
-    <!-- Modal for Login -->
-  {{>footer}}
-  </body>
-</html> --}}
-
 
 <!DOCTYPE html>
  {{>header}}
-
-
-
 <body>
- 
-  <div class="wrapper ">
-     
+  <div class="wrapper">
     <div class="main-panel" style="width: 100%;">
        {{>nav}}
-      <div class="content">
+      <div class="content" >
         <div class="row">
           <div class="col-lg-4">
             <div class="card">
@@ -90,7 +31,7 @@
                 </div>
               {{/each}}
               <div style="text-align: right;margin-right: 18px;margin-bottom: 16px;">
-                <a href="/notifications">View all</a>
+                <a href="/notifications?hid=0">View all</a>
               </div>
             </div>
           </div>
@@ -135,26 +76,4 @@
   <!-- Modal for Login -->
   {{>footer}}
 </body>
-
-
-<script src=" js/core/jquery.min.js"></script>
-<script src=" js/core/popper.min.js"></script>
-<script src=" js/core/bootstrap.min.js"></script>
-<script src=" js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-<!-- Chart JS -->
-<script src=" js/plugins/chartjs.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src=" js/plugins/bootstrap-notify.js"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src=" js/now-ui-dashboard.js?v=1.0.1"></script>
-<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src=" demo/demo.js"></script>
-<script>
-  $(document).ready(function () {
-    // Javascript method's body can be found in public/js/demos.js
-    demo.initDashboardPageCharts();
-  });
-</script>
 </html>
