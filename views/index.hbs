@@ -6,10 +6,6 @@
   
   <body background="/images/background.jpg">
     {{>nav}}
-<<<<<<< HEAD
-      <div class="main">
-          <hr>
-=======
     <div class="main">
       <hr>
       <div class="row">
@@ -24,38 +20,18 @@
           <a href="/notifications?hid=0">View all</a>
         </div>
         <div class="col-lg-8">
->>>>>>> d3811b9d07fc20ca289e25b39831033a2c9c1e4c
           <h2>HOSTELS</h2>
           <div class="row bg-dark">
             {{#each hostel}}
             <div class="col-xm-12 col-md-4 col-lg-3 column shadow" style="padding: 0px; margin-top: 10px; margin-bottom: 10px;">
-<<<<<<< HEAD
-             <a href="/hostel?hid={{hostelId}}">
-              <div class="container content" style="text-align: center; background-color: #DDDDDD">
-                  <img src="images/hostels/{{hostelId}}.jpg" class="img-thumbnail" alt="Mountains" style="height: 150px; width: 100%;min-height: 150px">
-                <div>
-                  <p><h5>{{hostelName}}</h5></p>    
-=======
               <a href="/hostel?hid={{hostelId}}">
                 <div class="container content" style="text-align: center; background-color: #DDDDDD">
                   <img src="images/hostels/{{hostelId}}.jpg" class="img-thumbnail" alt="Mountains" style="height: 150px; width: 100%;min-height: 150px">
                   <div>
                     <p><h5>{{hostelName}}</h5></p>    
                   </div>
->>>>>>> d3811b9d07fc20ca289e25b39831033a2c9c1e4c
                 </div>
               </a>
-<<<<<<< HEAD
-              {{#if ../user.is_admin}}<p class="text-center"><a href="/EditHostel?hid={{hostelId}}">Edit <img src="/images/image_edit.png"></a></p>{{/if}}
-              
-            </div>
-            {{/each}}
-          <!-- END GRID -->
-          </div>
-          <!-- Modal for Login -->
-        {{>footer}}
-        
-=======
             
               {{#if ../user.is_admin}}
               <p class="text-center">
@@ -73,6 +49,5 @@
     </div>
     <!-- Modal for Login -->
   {{>footer}}
->>>>>>> d3811b9d07fc20ca289e25b39831033a2c9c1e4c
   </body>
 </html>
