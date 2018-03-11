@@ -8,7 +8,9 @@ const TableStructure=`
         contact char(15),
         hostel_id int NOT NULL,
         name char(100) NOT NULL,
-        PRIMARY KEY (uid)
+        facebook char(100),
+        twitter char(100),
+        PRIMARY KEY (uid),
     )
 `;
 
@@ -53,6 +55,34 @@ const createUser=(userDetails,callback)=>
     });
 };
 
+const editUser=(userDetails,callback)=>
+{
+    if(userDetails.uid===undefined)
+    {
+        return callback("Error: No UID Provided");
+    }
+    getUserById(userDetails.uid,(err,user)=>
+    {
+        name=userDetails.name===undefined?user.name:userDetails.name;
+        password=userDetails.password===undefined?user.password:userDetails.password;
+        is_admin=userDetails.is_admin===undefined?user.is_admin:userDetails.is_admin;
+        contact=userDetails.contact===undefined?user.contact:userDetails.contact;
+        facebook=userDetails.facebook===undefined?user.facebook:userDetails.facebook;
+        twitter=userDetails.twitter===undefined?user.twitter:userDetails.twitter;
+        
+        const editUserQuery=`UPDATE USERS SET 
+                                name=\"${name}\",
+                                password=\"${password}\",
+                                is_admin=${is_admin},
+                                contact=\"${contact}\",
+                                facebook=\"${facebook}\",
+                                twitter=\"${twitter}\"
+                                WHERE UID=\"${userDetails.uid}\";
+                            `
+        connection.query(editUserQuery,callback);
+    });
+}
+
 const getUserById=(uid,callback)=>
 {
     if(uid===undefined)
@@ -96,5 +126,6 @@ const changePassword=(uid,newPassword,callback)=>
 module.exports={
     createUser,
     getUserById,
-    changePassword
+    changePassword,
+    editUser
 }
