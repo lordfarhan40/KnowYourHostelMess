@@ -4,20 +4,21 @@
     background-color:red;
 }</style></head>
 	{{>header}}
-<body background="/images/homeback.jpg">
+<body style="background: #EEEEEE">
 	{{>nav}}
 
-	<div class="container">
-		<div class="row">
-			<div class="col-xm-12 col-sm-12 col-md-10 col-lg-6" style="margin: 0 auto; padding: 0 auto;">
-				<form class="jumbotron" method="post" action="/login" style="background-color:black">
-					<h3 align="center" style="color: red">Wrong Credentials</h3>
-				<b>Enter Username</b><input type="text" class="form-control" placeholder="Enter Name" name="uid"><br>
-				<b>Password</b><input type="password" class="form-control" placeholder="Password" name="password"><br>
-				<button type="submit" class="form-control btn btn-primary">Login</button>
-				</form>
-			</div>
-			
+	<div class="container" >
+		<div class="section section-tabs">
+				<div class="row">
+					<div class="col-xm-12 col-sm-12 col-md-10 col-lg-6 card" style="margin: 0 auto; padding: 0 auto;padding:40px;margin-top:40px">
+						<form method="post" action="/login">
+							{{#if error}}<h4 align="center" style="color: red">Wrong Credentials</h4>{{/if}}
+						<b>Enter Username</b><input type="text" class="form-control" placeholder="Enter Name" name="uid"><br>
+						<b>Password</b><input type="password" class="form-control" placeholder="Password" name="password"><br>
+						<button type="submit" class="form-control btn btn-primary">Login</button>
+						</form>
+					</div>
+				</div>
 		</div>
 	</div>
 	{{>footer}}
