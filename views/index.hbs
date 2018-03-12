@@ -47,7 +47,7 @@
                               <h4 class="card-title"> {{hostelName}}</h4>
                             </a>
                           </div>
-                          <div class="col-lg-1" style="padding-top: 8px;">
+                          <div style="position:absolute;top:10px;right:10px">
                             {{#if ../user.is_admin}}
                             <p class="text-right">
                               <a href="/EditHostel?hid={{hostelId}}">
@@ -55,7 +55,7 @@
                               </a>
                             </p>
                             {{/if}}</div>
-                        </div>
+                          </div>
                       <a href="/hostel?hid={{hostelId}}">
                          <img class="card-img-top" src="images/hostels/{{hostelId}}.jpg" alt="Card image cap" >
                        </a>

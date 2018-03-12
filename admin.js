@@ -5,7 +5,6 @@ const users = require('./models/users.js');
 const hostels=require('./models/hostels.js');
 const mess_bills=require('./models/mess_bills.js');
 const utility = require('./utility/utility.js');
-
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials
@@ -278,6 +277,40 @@ function setUpRoutes(app){
     });
   });
 
+  app.post("/EditProfile",require('connect-ensure-login').ensureLoggedIn('/login'),(req,res)=>
+  {
+    var userDetails={
+      uid:req.user.uid,
+      contact:req.body.contact,
+      name:req.body.name,
+      facebook:req.body.facebook,
+      twitter:req.body.twitter
+    };
+    var image=req.files.image;
+    users.editUser(userDetails,(err,reply)=>{
+      if(err)
+        return console.log(err);
+      if(image)
+      {
+        require('fs').unlink(__dirname +'/public/images/users/'+req.user.uid+'.jpg',(err)=>
+        {
+          image.mv(__dirname +'/public/images/users/'+req.user.uid+'.jpg',(err)=>
+          {
+            if(err)
+            {
+              console.log(err);
+              return res.send("Error");
+            }else{
+              return res.redirect("/");
+            }
+          });
+        });
+      }else
+      {
+        return res.redirect("/");
+      }
+    });
+  });
 }
 
 module.exports={
