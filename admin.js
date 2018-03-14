@@ -26,6 +26,8 @@ passport.use(new Strategy({
 }));
 
 
+const loginFailure="/login?error=1"
+
 // Configure Passport authenticated session persistence.
 //
 // In order to restore authentication state across HTTP requests, Passport needs
@@ -59,7 +61,7 @@ function setUpRoutes(app){
   app.use(passport.session());
 
   app.post('/create_user',
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   function(req, res){
     if(req.user.is_admin==0){
       res.send("You are not the admin, you cannot create another user");
@@ -87,7 +89,7 @@ function setUpRoutes(app){
   });
 
   app.get('/create_user',
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   function(req, res){
     if(req.user.is_admin==0){
       res.send('You are not the admin!.');
@@ -100,7 +102,7 @@ function setUpRoutes(app){
   });
 
   app.get('/create_hostel',
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   function(req, res){
     if(req.user.is_admin==0){
       res.send("You are not the admin!.");
@@ -113,7 +115,7 @@ function setUpRoutes(app){
   });
 
   app.post('/create_hostel',
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   function(req, res){
     if(req.user.is_admin==0){
       res.send("You are not the admin!.");
@@ -139,12 +141,14 @@ function setUpRoutes(app){
 
   app.get('/login',
   function(req, res){
-    res.render('LoginPage.hbs');
+    res.render('LoginPage.hbs',{
+      error:req.query.error
+    });
   });
 
   //Takes in uid and password as post paramenters to login
   app.post('/login', 
-  passport.authenticate('local',{ failureRedirect: '/login' }),
+  passport.authenticate('local',{ failureRedirect: loginFailure }),
   function(req, res) {
     res.redirect("/");
   });
@@ -156,13 +160,13 @@ function setUpRoutes(app){
   });
 
   app.get('/EditProfile',
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   (req, res) => {
     res.render('EditProfile', {user: req.user});
   });
 
   app.get('/EditHostel',
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   (req, res) => {
     var hid=req.query.hid;
     if(hid === undefined)
@@ -175,7 +179,7 @@ function setUpRoutes(app){
   });
 
   app.post('/EditHostel',
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   (req, res) => {
     var name=req.body.name;
     var description=req.body.description;
@@ -211,7 +215,7 @@ function setUpRoutes(app){
     });
   });
   app.get("/UploadBill",
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   (req,res)=>
   {
     var hid=req.user.hostel_id;
@@ -222,7 +226,7 @@ function setUpRoutes(app){
   });
 
   app.post("/UploadBill",
-  require('connect-ensure-login').ensureLoggedIn('/login'),
+  require('connect-ensure-login').ensureLoggedIn(loginFailure),
   (req,res)=>
   {
     var hid=req.user.hostel_id;
@@ -248,14 +252,14 @@ function setUpRoutes(app){
       });
     });
   });
-  app.get('/Manage', require('connect-ensure-login').ensureLoggedIn('/login'),
+  app.get('/Manage', require('connect-ensure-login').ensureLoggedIn(loginFailure),
   (req, res) => {
     hostels.getHostelById(req.user.hostel_id, (err, hostelDetails) => {
       res.render('HostelMenu', {user: req.user, hostelDetails});
     }) 
   });
 
-  app.post('/addNotification', require('connect-ensure-login').ensureLoggedIn('/login'),(req, res) => {
+  app.post('/addNotification', require('connect-ensure-login').ensureLoggedIn(loginFailure),(req, res) => {
    
     utility.addNotification(req.user, req.body, (error, result) => {
       if(error)
@@ -266,7 +270,7 @@ function setUpRoutes(app){
     })
   });
 
-  app.post('/deleteNotification', require('connect-ensure-login').ensureLoggedIn('/login'), (req, res) => {
+  app.post('/deleteNotification', require('connect-ensure-login').ensureLoggedIn(loginFailure), (req, res) => {
     utility.removeNotification(req.body.nid, (error, result) => {
       if(error) {
         res.send(error);
@@ -277,7 +281,7 @@ function setUpRoutes(app){
     });
   });
 
-  app.post("/EditProfile",require('connect-ensure-login').ensureLoggedIn('/login'),(req,res)=>
+  app.post("/EditProfile",require('connect-ensure-login').ensureLoggedIn(loginFailure),(req,res)=>
   {
     var userDetails={
       uid:req.user.uid,
@@ -308,6 +312,31 @@ function setUpRoutes(app){
       }else
       {
         return res.redirect("/");
+      }
+    });
+  });
+
+
+  app.post("/change_password",(req,res)=>
+  {
+    var uid=req.user.uid;
+    var curpass=req.body.curpass;
+    var newpass=req.body.newpass;
+    curpass=sha(curpass);
+    newpass=sha(newpass);
+    users.getUserById(uid,(err,curuser)=>
+    {
+      if(curuser.password==curpass)
+      {
+        users.editUser({uid,password:newpass},(err)=>
+        {
+          if(err)
+            return console.log(err);
+          return res.send(1);
+        });
+      }else 
+      {
+        return res.send(0);
       }
     });
   });

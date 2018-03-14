@@ -36,7 +36,6 @@ const updateMessMenu=(hid,messMenu,callback)=>
 {
     if(messMenu.hid===undefined)
         return callback("HID NOT PROVIDED");
-    var mainQuery="";
     var pin=0;
     for(var i=0;i<7;++i)
     {
@@ -71,6 +70,8 @@ const getMessMenu=(hid,callback)=>
         return callback(undefined,messMenuRet);
     });
 }
+
+
 
 module.exports={
     createMessMenu,
