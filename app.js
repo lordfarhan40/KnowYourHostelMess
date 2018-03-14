@@ -49,7 +49,6 @@ app.get('/', (request, response) => {
 			result.forEach((x) =>{
 				hostel.push({hostelName: x.name, hostelId: x.hid});
 			});
-
 			utility.getNotifications(0, 10, (error, topNotifications) =>{
 				if(error) {
 					console.log(error);
@@ -87,12 +86,24 @@ app.get("/hostel",(request,response)=>
 					console.log(error);
 					response.send(error);
 				}
-				response.render('hostel', { 
-					hostel,
-					user:request.user,
-					topNotifications,
-					mess_bills
-				});
+				var hostelUsers=[];
+				users.getUserByHostelId(hostelId,(error,hostelUser)=>{
+					if(error){
+						console.log(error);
+						response.send(error);
+					}
+					console.log('HostelvUsers',hostelUser);
+					hostelUser.forEach((x)=>{
+						hostelUsers.push({name:x.name,contact:x.contact,facebook:x.facebook,twiter:x.twitter});
+					});
+					response.render('hostel', { 
+						hostel,
+						user:request.user,
+						topNotifications,
+						mess_bills,
+						hostelUsers
+					});
+				});	
 			});
 		});
 	});

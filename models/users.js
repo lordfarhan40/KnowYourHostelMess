@@ -108,6 +108,29 @@ const getUserById=(uid,callback)=>
     });
 };
 
+const getUserByHostelId=(hid,callback)=>
+{
+    if(hid===undefined)
+    {
+        callback("Error: No Id provided")
+        return;
+    }
+    const getUserByIdQuery=`SELECT * FROM USERS WHERE hostel_id=\"${hid}\"`;
+    connection.query(getUserByIdQuery,(err,result)=>
+    {
+        if(err)
+        {
+            callback(err);
+            return;
+        }
+        if(result.length==0)
+        {
+            callback(err,undefined);
+            return;
+        }
+        callback(err,result);        
+    });
+};
 const changePassword=(uid,newPassword,callback)=>
 {
     if(uid===undefined||newPassword===undefined)
@@ -127,5 +150,6 @@ module.exports={
     createUser,
     getUserById,
     changePassword,
-    editUser
+    editUser,
+    getUserByHostelId
 }
