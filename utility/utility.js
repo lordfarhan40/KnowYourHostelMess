@@ -65,9 +65,55 @@ var removeNotification = (nid, callback) => {
 				callback(undefined, result);
 		})
 }
-
+var makeMessMenu = (menu) => {
+	var mess_menu = [];
+    mess_menu.push({
+      breakfast: menu.MondayBreakfast,
+      lunch: menu.MondayLunch,
+      evening: menu.MondayEvening,
+      dinner: menu.MondayDinner,
+    });
+    mess_menu.push({
+      breakfast: menu.TuesdayBreakfast,
+      lunch: menu.TuesdayLunch,
+      evening: menu.TuesdayEvening,
+      dinner: menu.TuesdayDinner,
+    });
+    mess_menu.push({
+      breakfast: menu.WednesdayBreakfast,
+      lunch: menu.WednesdayLunch,
+      evening: menu.WednesdayEvening,
+      dinner: menu.WednesdayDinner,
+    });
+    mess_menu.push({
+      breakfast: menu.ThursdayBreakfast,
+      lunch: menu.ThursdayLunch,
+      evening: menu.ThursdayEvening,
+      dinner: menu.ThursdayDinner,
+    });
+    mess_menu.push({
+      breakfast: menu.FridayBreakfast,
+      lunch: menu.FridayLunch,
+      evening: menu.FridayEvening,
+      dinner: menu.FridayDinner,
+    });
+    mess_menu.push({
+      breakfast: menu.SaturdayBreakfast,
+      lunch: menu.SaturdayLunch,
+      evening: menu.SaturdayEvening,
+      dinner: menu.SaturdayDinner,
+    });
+    mess_menu.push({
+      breakfast: menu.SundayBreakfast,
+      lunch: menu.SundayLunch,
+      evening: menu.SundayEvening,
+      dinner: menu.SundayDinner,
+    });
+    return mess_menu;
+}
 module.exports = {
 	getNotifications,
 	addNotification,
-	removeNotification
+	removeNotification,
+	makeMessMenu
 }

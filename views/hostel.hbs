@@ -101,72 +101,16 @@
                             <div id="messMenu", class="tabcontent animated fadeIn"  style="display:none;width: 100%;height: 700px;">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Mess Menu</h4>
+                                            <h4 class="card-title">Mess Menu
+                                            {{#ifCond hostel.hid user.hostel_id}}
+                                                <a onclick="msg4()" class="text-primary" style="cursor: pointer; position: absolute; top: 30px; right: 20px;"><i class="now-ui-icons ui-1_settings-gear-63"></i></a>
+                                            </h4>
+                                            {{/ifCond}}
                                         </div>
                                         <div class="card-body">
                                             <div class="tabble-responsive">
-                                        <table class="table table-bordered" style="">
-                                            <thead class="text-primary">
-                                                <tr>
-                                                    <th style="text-align: center;">Day</th>
-                                                    <th style="text-align: center;">Breakfast</th>
-                                                    <th style="text-align: center;">Lunch</th>
-                                                    <th style="text-align: center;">Snacks</th>
-                                                    <th style="text-align: center;">Dinner</th>
-                                                  </tr>
-                                              </thead>
-                                              <tbody>
-                                                  <tr>
-                                                    <td>Monday</td>
-                                                    <td>Maggi</td>
-                                                    <td>Mix veg<br>roti/daal/Rice</td>
-                                                    <td>N/A</td>
-                                                    <td>Chole Bhatoore<br>Rice/Custered</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Tuesday</td>
-                                                    <td>Maggi</td>
-                                                    <td>Mix veg /roti/daal/Rice</td>
-                                                    <td>N/A</td>
-                                                    <td>Chole Bhatoore<br>Rice/Custered</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Wednesday</td>
-                                                    <td>Maggi</td>
-                                                    <td>Mix veg /roti/daal/Rice</td>
-                                                    <td>N/A</td>
-                                                    <td>Chole Bhatoore<br>Rice/Custered</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Thursday</td>
-                                                   <td>Maggi</td>
-                                                    <td>Mix veg /roti/daal/Rice</td>
-                                                    <td>N/A</td>
-                                                    <td>Chole Bhatoore<br>Rice/Custered</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Friday</td>
-                                                    <td>Maggi</td>
-                                                    <td>Mix veg /roti/daal/Rice</td>
-                                                    <td>N/A</td>
-                                                    <td>Chole Bhatoore<br>Rice/Custered</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Saturday</td>
-                                                    <td>Maggi</td>
-                                                    <td>Mix veg /roti/daal/Rice</td>
-                                                    <td>N/A</td>
-                                                    <td>Chole Bhatoore<br>Rice/Custered</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Sunday</td>
-                                                    <td>Maggi</td>
-                                                    <td>Mix veg /roti/daal/Rice</td>
-                                                    <td>N/A</td>
-                                                    <td>CChole Bhatoore<br>Rice/Custered</td>
-                                                  </tr>
-                                              </tbody>
-                                             </table>
+                                                {{>mess_menu}}
+                                                {{>edit_mess_menu}}
                                             </div>
                                         </div>
                                     </div>
@@ -182,6 +126,16 @@
         var noti=document.getElementById("notification");
         var member=document.getElementById("king");
         var mess=document.getElementById("messMenu");
+        var edit_menu = document.getElementById("edit_menu");
+        var view_menu = document.getElementById("view_menu");
+        function msg4(){
+            if(edit_menu.style.display == 'none'){
+                view_menu.style.display='none';
+                edit_menu.style.display='block';
+            }
+            else
+                edit_menu.style.display='block';
+        }
         function msg() {
 
         

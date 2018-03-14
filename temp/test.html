@@ -214,19 +214,88 @@ td {
                     <div id="messMenu", class="tabcontent animated fadeIn"  style="display:none;">
                         <form>
                             <table class="table table-responsive table-dark " style="background:gray" onmouseover="this.style.background='#63c5da';" onmouseout="this.style.background='gray';">
-                                
-                            </table>
-                            <button  style="width:70%; margin-left:200px; background-color:#ff6900; " class="btn btn-primary form-control" type="submit"><b>Submit</b></button>
-                        </form>
-                    </div>
+                                  <tr>
+        <th>Day</th>
+        <th>Breakfast</th>
+        <th>Lunch</th>
+        <th>Snacks</th>
+        <th>Dinner</th>
+      </tr>
+      <tr>
+        <td>Monday</td>
+        <td><input class="form-control" type="text" name="monBreakfast" placeholder="Breakfast"></td>
+        <td><input class="form-control" type="text" name="monLunch" placeholder="Lunch"></td>
+        <td><input class="form-control" type="text" name="monSnacks" placeholder="Snacks" value="N/A"></td>
+        <td><input class="form-control" type="text" name="monDinner" placeholder="Dinner"></td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+        <td><input class="form-control" type="text" name="tueBreakfast" placeholder="Breakfast"></td>
+        <td><input class="form-control" type="text" name="tueLunch" placeholder="Lunch"></td>
+        <td><input class="form-control" type="text" name="tueSnacks" placeholder="Snacks" value="N/A"></td>
+        <td><input class="form-control" type="text" name="tueDinner" placeholder="Dinner"></td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+        <td><input class="form-control" type="text" name="wedBreakfast" placeholder="Breakfast"></td>
+        <td><input class="form-control" type="text" name="wedLunch" placeholder="Lunch"></td>
+        <td><input class="form-control" type="text" name="wedSnacks" placeholder="Snacks" value="N/A"></td>
+        <td><input class="form-control" type="text" name="wedDinner" placeholder="Dinner"></td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+        <td><input class="form-control" type="text" name="thuBreakfast" placeholder="Breakfast"></td>
+        <td><input class="form-control" type="text" name="thuLunch" placeholder="Lunch"></td>
+        <td><input class="form-control" type="text" name="thuSnacks" placeholder="Snacks" value="N/A"></td>
+        <td><input class="form-control" type="text" name="thuDinner" placeholder="Dinner"></td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+        <td><input class="form-control" type="text" name="friBreakfast" placeholder="Breakfast"></td>
+        <td><input class="form-control" type="text" name="friLunch" placeholder="Lunch"></td>
+        <td><input class="form-control" type="text" name="friSnacks" placeholder="Snacks" value="N/A"></td>
+        <td><input class="form-control" type="text" name="friDinner" placeholder="Dinner"></td>
+      </tr>
+      <tr>
+        <td>Saturday</td>
+        <td><input class="form-control" type="text" name="satBreakfast" placeholder="Breakfast"></td>
+        <td><input class="form-control" type="text" name="satLunch" placeholder="Lunch"></td>
+        <td><input class="form-control" type="text" name="satSnacks" placeholder="Snacks" value="N/A"></td>
+        <td><input class="form-control" type="text" name="satDinner" placeholder="Dinner"></td>
+      </tr>
+      <tr>
+        <td>Sunday</td>
+        <td><input class="form-control" type="text" name="sunBreakfast" placeholder="Breakfast"></td>
+        <td><input class="form-control" type="text" name="sunLunch" placeholder="Lunch"></td>
+        <td><input class="form-control" type="text" name="sunSnacks" placeholder="Snacks" value="N/A"></td>
+        <td><input class="form-control" type="text" name="sunDinner" placeholder="Dinner"></td>
+      </tr>
+    </table>
+    
+    <button  style="width:70%; margin-left:200px; background-color:#ff6900; " class="btn btn-primary form-control" type="submit"><b>Submit</b></button>
+    </form>
+  </div>
+
+
+<!-- this is again for checking purpose -->
+                     </div>
+
+
+
+
+                   
+                              </nav>
+       
+                 </div>
+
+
+                   
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<footer class="footer">
-    <div class="container-fluid">
-    <ul>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+                        <ul>
                             <li>
                                 <a href="https://www.creative-tim.com">
                                     Contact Us
@@ -294,6 +363,11 @@ td {
         }
         
         function msg2() {
+        
+     //  var member= document.getElementById("king");
+
+                    //var noti = document.getElementById("notification");
+            
             if(member.style.display =='none'){
                 member.style.display="block";
                 noti.style.display="none";
@@ -306,6 +380,8 @@ td {
             }
         }
         </script>
+
+
 </body>
 <!--   Core JS Files   -->
 <script src="../public/js/core/jquery.min.js"></script>

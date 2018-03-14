@@ -34,16 +34,16 @@ const createMessMenu=(hid,callback)=>
 
 const updateMessMenu=(hid,messMenu,callback)=>
 {
-    if(messMenu.hid===undefined)
+    if(hid===undefined)
         return callback("HID NOT PROVIDED");
     var pin=0;
     for(var i=0;i<7;++i)
     {
         var updateMessMenuDay=`
-            UPDATE MESS_MENU SET breakfast=${messMenu[i].breakfast},
-            lunch=${messMenu[i].lunch},
-            evening=${messMenu[i].evening},
-            dinner=${messMenu[i].dinner} WHERE hid=${hid} AND day=${i}; 
+            UPDATE MESS_MENU SET breakfast=\'${messMenu[i].breakfast}\',
+            lunch=\'${messMenu[i].lunch}\',
+            evening=\'${messMenu[i].evening}\',
+            dinner=\'${messMenu[i].dinner}\' WHERE hid=${hid} AND day=${i}; 
         `;
         connection.query(updateMessMenuDay,(err,res)=>
         {

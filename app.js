@@ -12,7 +12,7 @@ const htmlGenerator = require('./utility/htmlGenerator.js');
 const fileUpload = require('express-fileupload');
 const mess_bills=require('./models/mess_bills.js');
 const utility = require('./utility/utility.js');
-
+const mess_menu = require('./models/mess_menu.js');
 // Initial setup for node
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var app = express();
@@ -92,16 +92,34 @@ app.get("/hostel",(request,response)=>
 						console.log(error);
 						response.send(error);
 					}
-					console.log('HostelvUsers',hostelUser);
 					hostelUser.forEach((x)=>{
 						hostelUsers.push({name:x.name,contact:x.contact,facebook:x.facebook,twiter:x.twitter});
 					});
+					mess_menu.getMessMenu(hostelId, (error, result) => {
+					if(error)
+						console.log(error);
+					if(result) {
+						var mess_menu = [];
+						var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+						for(var i = 0; i < 7; i++) {
+							var temp = {
+								day: days[i],
+								breakfast: result[i].breakfast,
+								lunch: result[i].lunch,
+								evening: result[i].evening,
+								dinner: result[i].dinner
+							}
+							mess_menu.push(temp);
+						}
+					}
 					response.render('hostel', { 
 						hostel,
 						user:request.user,
 						topNotifications,
 						mess_bills,
-						hostelUsers
+						hostelUsers,
+						mess_menu,
+					});
 					});
 				});	
 			});
@@ -115,7 +133,6 @@ app.get('/notifications', (request, response) => {
 			console.log(error);
 			response.send(error);
 		}
-		console.log('Yaha pahuch gaye' +request.query);
 		response.render('notifications', { 
 			user:request.user,
 			topNotifications

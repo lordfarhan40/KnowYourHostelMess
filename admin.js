@@ -5,6 +5,7 @@ const users = require('./models/users.js');
 const hostels=require('./models/hostels.js');
 const mess_bills=require('./models/mess_bills.js');
 const utility = require('./utility/utility.js');
+const mess_menu = require('./models/mess_menu.js');
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials
@@ -280,6 +281,22 @@ function setUpRoutes(app){
         res.redirect('/notifications?hid=' +req.user.hostel_id);
     });
   });
+
+
+
+  app.post('/changeMenu', require('connect-ensure-login').ensureLoggedIn(loginFailure), (req, res) => {
+    var temp  = utility.makeMessMenu(req.body)
+    mess_menu.updateMessMenu(req.body.hid, temp, (error, result) => {
+      if(error) {
+        console.log(error);
+        res.send(error);
+      }
+      else
+        res.redirect(`/hostel?hid=${req.body.hid}`);
+    });
+  });
+
+
 
   app.post("/EditProfile",require('connect-ensure-login').ensureLoggedIn(loginFailure),(req,res)=>
   {
