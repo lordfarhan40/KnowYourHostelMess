@@ -7,6 +7,14 @@
 	<div class="container">
 		<div class="row">
 			<div class="card col-xm-12 col-sm-12 col-md-10 col-lg-6" style="margin: 40px auto; padding: 30px;">
+						{{#if error}}
+						
+							<div class="alert alert-danger alert-dismissible">
+								<div class="container"></div>
+								<a href="#" class="close" data-dismiss="alert" aria-label="close" style="margin-top:9px">&times;</a>
+								<strong>Error!</strong> Wrong current password provided.
+							</div>
+						{{/if}}
 				<form class="shadow" method="POST" action="/EditProfile" encType="multipart/form-data">
 					<div align="center">
 							<img src="images/users/{{user.uid}}.jpg"  class = "img-raised rounded img-fluid" style="margin: 20px auto;" width="200" height="200">
@@ -16,18 +24,19 @@
 				<b>Name</b><input type="text" class="form-control" placeholder="Enter Name" value="{{user.name}}" name="name"><br>
 				<b>Contact Number</b>
 				<div class="input-group mb-2">
-					<input name="contact" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Contact Number">
+					<input name="contact" type="text" class="form-control" id="inlineFormInputGroup" value="{{user.contact}}" placeholder="Contact Number">
 				</div>
 				<b>Facebook</b>
 				<div class="input-group mb-2">
-					<input name="facebook" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter Facebook URL">
+					<input name="facebook" type="text" class="form-control" id="inlineFormInputGroup" value="{{user.facebook}}" placeholder="Enter Facebook URL">
 				</div>
 				<b>Twitter</b>
 				<div class="input-group mb-2">
-					<input name="twitter" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter Twitter URL">
+					<input name="twitter" type="text" class="form-control" id="inlineFormInputGroup" value="{{user.twitter}}" placeholder="Enter Twitter URL">
 				</div>
-				<button type="button" class="form-control btn btn-alert shadow" data-toggle="modal" data-target="#exampleModal">Change Password</button>										
 				<button type="submit" class="form-control btn btn-primary shadow">Submit</button>
+				<hr/>
+				<button type="button" class="form-control btn btn-alert shadow" data-toggle="modal" data-target="#exampleModal">Change Password</button>										
 				</form>
 			</div>
 		</div>
@@ -44,13 +53,19 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        "Here the stuff related to password change will go"
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Change Password</button>
-      </div>
+			<form method="post" action="/change_password">
+				<div class="modal-body">
+					<b>Current Password: </b><br>
+					<input name="curpass" type="password" class="form-control"  placeholder="Enter the current password">
+					<br>
+					<b>New Password: </b><br>
+					<input name="newpass" type="password" class="form-control"  placeholder="Enter the new password">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Change Password</button>
+				</div>
+			</form>
     </div>
   </div>
 </div>
