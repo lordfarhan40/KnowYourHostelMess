@@ -93,7 +93,7 @@ app.get("/hostel",(request,response)=>
 						response.send(error);
 					}
 					hostelUser.forEach((x)=>{
-						hostelUsers.push({name:x.name,contact:x.contact,facebook:x.facebook,twiter:x.twitter});
+						hostelUsers.push({name:x.name,uid:x.uid,contact:x.contact,facebook:x.facebook,twiter:x.twitter});
 					});
 					mess_menu.getMessMenu(hostelId, (error, result) => {
 					if(error)
