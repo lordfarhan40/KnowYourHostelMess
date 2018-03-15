@@ -256,8 +256,34 @@ function setUpRoutes(app){
   });
   app.get('/Manage', require('connect-ensure-login').ensureLoggedIn(loginRequired),
   (req, res) => {
+    if(req.user.is_admin) {
+      res.render('AdminMenu');
+      return;
+    }
     hostels.getHostelById(req.user.hostel_id, (err, hostelDetails) => {
-      res.render('HostelMenu', {user: req.user, hostelDetails});
+      mess_menu.getMessMenu(req.user.hostel_id, (error, result) => {
+          if(error)
+            console.log(error);
+          if(result) {
+            var mess_menu = [];
+            var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            for(var i = 0; i < 7; i++) {
+              var temp = {
+                day: days[i],
+                breakfast: result[i].breakfast,
+                lunch: result[i].lunch,
+                evening: result[i].evening,
+                dinner: result[i].dinner
+              }
+              mess_menu.push(temp);
+            }
+          }
+          res.render('HostelMenu', { 
+            hostel: hostelDetails,
+            user:req.user,
+            mess_menu
+          });
+          });
     }) 
   });
 

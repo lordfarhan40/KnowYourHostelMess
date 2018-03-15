@@ -7,7 +7,7 @@
                 {{>nav}}
                 <div class="content">    
                         <div class="row ">
-                            <div class="col-lg-4">
+                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="card " >
                                     <img class="card-img-top" src="/images/hostels/{{hostel.hid}}.jpg" alt="Card image" style="width:100%;height:400px; margin-top: 10px;">
                                     <div class="card-body">
@@ -18,19 +18,28 @@
                                     </div>
                                 </div>      
                             </div>
-                            <div class="col-lg-8 ">
-                                <nav class="navbar navbar-expand-md  bg-company-red" style="display:flex;flex-direction:row;justify-content:flex-end ">
-                                    <div class="btn-group btn-group-justified" >
-                                        <div class="btn-group" >
-                                            <button type="button" class="btn btn-primary "onclick="msg1()"><b>Notification</b></button>
-                                        </div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary" onclick="msg()"><b>Mess Menu</b></button>
-                                        </div>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary" onclick="msg2()"><b>Mess Member</b></button>
-                                        </div>
+                            <div class="col-xm-12 col-sm-12 col-md-8 col-lg-8 ">
+                                <nav class="navbar navbar-expand-lg bg-primary">
+                                  <div class="container">
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                                    <span class="navbar-toggler-bar navbar-kebab"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarNav">
+                                      <ul class="navbar-nav">
+                                        <li class="nav-item">
+                                          <a  href='#' class="nav-link" onclick="tabNotification()">Notifications </a>
+                                        </li>
+                                       <li class="nav-item">
+                                          <a href='#' class="nav-link" onclick="tabMess()">Mess Menu</a>
+                                        </li>
+                                        <li class="nav-item">
+                                          <a class="nav-link" href="#" onclick="tabMember()">Mess members</a>
+                                        </li>
+                                      </ul>
                                     </div>
+                                  </div>
                                 </nav>
                                 <div id="king" style="display:none" animated fadeInDown>
                                     <div class="row">
@@ -68,7 +77,7 @@
                                         {{/each}}       
                                     </div>
                                 </div>
-                                <div id="notification" class=" animated fadeIn" >
+                                <div style="align-items: center;" id="notification" class=" animated fadeIn" >
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="card">
@@ -136,7 +145,7 @@
             else
                 edit_menu.style.display='block';
         }
-        function msg() {
+        function tabMess() {
 
         
         if(mess.style.display =='none'){
@@ -152,7 +161,7 @@
         }
         
         
-                function msg1() {
+                function tabNotification() {
         
           
                   //  var noti = document.getElementById("notification");
@@ -169,7 +178,7 @@
             }
         }
         
-        function msg2() {
+        function tabMember() {
             if(member.style.display =='none'){
                 member.style.display="block";
                 noti.style.display="none";

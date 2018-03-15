@@ -1,7 +1,7 @@
 
 <form action="/changeMenu" method = "post"  style="display: none;" id="edit_menu">
 <input type="hidden" name="hid" value="{{hostel.hid}}">
-<table class="table table-bordered">
+<table class="table table-responsive table-bordered">
     <thead class="text-primary">
         <tr>
          <th style="text-align: center;">Day</th>
@@ -23,5 +23,5 @@
         {{/each}}
   </tbody>
  </table>
- <button  style="width:70%; margin-left:200px; background-color:#ff6900; " class="btn btn-primary form-control" type="submit"><b>Submit</b></button>
+ <button class="btn btn-primary form-control" type="submit" style=" background-color: #ff6900"><b>Submit</b></button>
 </form>
