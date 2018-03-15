@@ -35,7 +35,7 @@
                                     <div class="row justify-content-center">
                                         <div class="card">
                                             <div class="card-header card-header-info">
-                                                <a href="/EditHostel?hid={{hostelId}}">
+                                                <a href="/EditHostel?hid={{hostelId}}" data-toggle="modal" data-target="#addUserModel">
                                                     <h4><i class="card-title now-ui-icons users_single-02">
                                             Add Member</i></h4>
                                                 </a>
@@ -49,11 +49,13 @@
                                                             <th>Options</th>
                                                         </thead>
                                                         <tbody>
+                                                            {{#each userList}}
                                                             <tr>
-                                                                <td class="text-left">Monish Akram</td>
-                                                                <td class="text-left">Tilak</td>
-                                                                <td class="text-left"><a href="#">Edit</a> <a href="#">Delete</a></td>
+                                                                <td class="text-left">{{name}}</td>
+                                                                <td class="text-left">{{hostel}}</td>
+                                                                <td class="text-left"><a class="open-EditModal" href="/EditHostel?hid={{hostelId}}" data-toggle="modal" data-target="#editUserModel" onclick="sendData('{{uid}}')">Edit</a> <a href="#">Delete</a></td>
                                                             </tr>
+                                                            {{/each}}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -103,6 +105,13 @@
         </div>
     </div>
     <script>
+           
+            function sendData(uid){
+                      document.getElementById("uid").value=uid;
+
+            }
+           
+
 
         var noti=document.getElementById("notification");
         var member=document.getElementById("hostel");
@@ -164,6 +173,71 @@
         }
         </script>
         {{>footer}}
+        <!-- Modal -->
+        <div class="modal fade" id='addUserModel' tabindex="-1" role="dialog" aria-labelledby="addUserModelLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addUserModelLabel">Add New User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                    <form method="post" action="/create_user">
+                        <div class="modal-body">
+                            <b>User ID</b><br>
+                            <input name="uid" type="text" class="form-control"  placeholder="User ID must be unique">
+                            <br>
+                            <b>Name</b><br>
+                            <input name="name" type="text" class="form-control"  placeholder="User ID must be unique">
+                            <br>
+                            <b>Password</b>
+                            <br>
+                            <input name="password" type="text" class="form-control"  placeholder="Enter a default password">
+                            <br>
+                            <input type="text" name="contact" class="form-control" placeholder="Enter contact number">
+                            <br>
+                            <select class ="custom-select mb-2 mr-sm-2 mb-sm-0" name="hostel_id">
+                                {{#each hostelList}}
+                                    <option value="{{hid}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                            <input type="hidden" name="facebook" value="http://www.facebook.com">
+                            <input type="hidden" name="twitter" value="http://www.twitter.com">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Add User</button>
+                        </div>
+                    </form>
+            </div>
+          </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="editUserModel" tabindex="-1" role="dialog" aria-labelledby="editUserModelLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editUserModelLabel">Edit User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+                    <form method="post" action="/reset_password">
+                        <div class="modal-body">
+                            <b>New Password: </b><br>
+                            <input name="password" type="text" class="form-control"  placeholder="Enter the new password" >
+                            <input type="hidden" name="uid" value="" id="uid">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Reset Password</button>
+                        </div>
+                    </form>
+            </div>
+          </div>
+        </div>
+
     </body>
   <script type="text/javascript">
     function openTab(evt, tabName) {

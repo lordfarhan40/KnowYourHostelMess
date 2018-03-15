@@ -75,12 +75,15 @@ function setUpRoutes(app){
       is_admin:req.body.is_admin===undefined?0:1,
       hostel_id:req.body.hostel_id,
       name:req.body.name,
+      facebook: req.body.facebook,
+      twitter: req.body.twitter,
+      contact: req.body.contact
     }
     users.createUser(userDetails,(err,created)=>
     {
       if(!err&&created==true)
       {
-        res.send("The user got inserted!");
+        res.redirect('/Manage');
       }else
       {
        console.log(err);
@@ -130,7 +133,12 @@ function setUpRoutes(app){
     {
       if(!err&&isSuccess==true)
       {
-        res.redirect("/");
+        hostels.getHostelsList((error, result) => {
+          var hid = result[result.length -1].hid;
+          mess_menu.createMessMenu(hid, (error, result) => {
+            res.redirect('/Manage');
+          })
+        });
       }else
       {
         console.log(err);
@@ -257,7 +265,35 @@ function setUpRoutes(app){
   app.get('/Manage', require('connect-ensure-login').ensureLoggedIn(loginRequired),
   (req, res) => {
     if(req.user.is_admin) {
-      res.render('AdminMenu');
+      users.getAllUsers((error, result) => {
+        if(error) {
+          console.log(error);
+          return;
+        }
+        hostels.getHostelsList((error, hostelList) => {
+        var hostelNames = [];
+        for(var i = 0; i < hostelList.length; i++)
+          hostelNames.push({name: hostelList[i].name, hid: hostelList[i].hid});
+
+        var userList = [];
+        for(var i = 0; i < result.length; i++)
+          if(!result[i].is_admin)
+            hostelNames.forEach((x) => {
+                if(x.hid == result[i].hostel_id) {
+                  userList.push({
+                    uid: result[i].uid,
+                    name: result[i].name,
+                    hostel: x.name,
+                    hid: result[i].hostel_id,
+                    contact: result[i].contact
+                 });
+              }
+            });
+            res.render('AdminMenu', {user: req.user,
+                                      userList,
+                                      hostelList});
+        });
+      });
       return;
     }
     hostels.getHostelById(req.user.hostel_id, (err, hostelDetails) => {
@@ -382,6 +418,15 @@ function setUpRoutes(app){
       {
         return res.redirect("/editProfile?pass_status=1");
       }
+    });
+  });
+  app.post('/reset_password', (req, res) => {
+    users.editUser({uid: req.body.uid, password: sha(req.body.password)}, (error, result)=> {
+      if(error) {
+          console.log(error);
+          return;
+      }
+      res.redirect('/Manage');
     });
   });
 }

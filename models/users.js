@@ -29,15 +29,17 @@ const createUser=(userDetails,callback)=>
             return callback(err,undefined);
         }
         if(res===undefined){
-            userDetails.contact=userDetails.contact===undefined?`\"0\"`:"\"userDetails.contact\"";
+            userDetails.contact=userDetails.contact===undefined?`\"0\"`:userDetails.contact;
             const createUserQuery=`
-            INSERT INTO USERS(uid,password,is_admin,hostel_id,name,contact) values(\
+            INSERT INTO USERS(uid,password,is_admin,hostel_id,name,contact,facebook,twitter) values(\
                 "${userDetails.uid}\",
                 \"${userDetails.password}\",
                 ${userDetails.is_admin},
                 ${userDetails.hostel_id},
                 \"${userDetails.name}\",
-                ${userDetails.contact}
+                \"${userDetails.contact}\",
+                \"${userDetails.facebook}\",
+                \"${userDetails.twitter}\"
             )`;
             connection.query(createUserQuery,(err,res)=>
             {
@@ -145,11 +147,18 @@ const changePassword=(uid,newPassword,callback)=>
     `;
     connection.query(changePasswordQuery,callback);
 };
+ 
+ const getAllUsers= (callback) => {
+
+    const getAllUserQuery = `SELECT uid, is_admin, contact, hostel_id, name FROM USERS;`;
+    connection.query(getAllUserQuery, callback);
+ }
 
 module.exports={
     createUser,
     getUserById,
     changePassword,
     editUser,
-    getUserByHostelId
+    getUserByHostelId,
+    getAllUsers
 }

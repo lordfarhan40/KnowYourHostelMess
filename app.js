@@ -92,6 +92,8 @@ app.get("/hostel",(request,response)=>
 						console.log(error);
 						response.send(error);
 					}
+					if(!hostelUser)
+						hostelUser = [];
 					hostelUser.forEach((x)=>{
 						hostelUsers.push({name:x.name,uid:x.uid,contact:x.contact,facebook:x.facebook,twiter:x.twitter});
 					});
