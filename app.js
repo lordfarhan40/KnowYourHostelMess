@@ -54,7 +54,6 @@ app.get('/', (request, response) => {
 					console.log(error);
 					response.send(error);
 				}
-				console.log(topNotifications);
 				response.render('index', { 
 					hostel,
 					user:request.user,
@@ -69,6 +68,9 @@ app.get('/', (request, response) => {
 app.get("/hostel",(request,response)=>
 {
 	var hostelId=request.query.hid;
+	var month = request.query.month;
+	if(!month)
+		month = new Date().getMonth();
 	hostel.getHostelById(hostelId,(err,queryRep)=>
 	{
 		if(err){
@@ -80,9 +82,7 @@ app.get("/hostel",(request,response)=>
 		hostel.hid=queryRep.hid;		//Temp for image display
 		hostel.description=queryRep.description;
 		//console.log(queryRep);
-		mess_bills.getBillsByHid(hostelId,(err,bills)=>
-		{
-			utility.getNotifications(hostelId, 5, (error, topNotifications) =>{
+		utility.getNotifications(hostelId, 5, (error, topNotifications) =>{
 				if(error) {
 					console.log(error);
 					response.send(error);
@@ -115,18 +115,21 @@ app.get("/hostel",(request,response)=>
 							mess_menu.push(temp);
 						}
 					}
-					response.render('hostel', { 
+					mess_bills.getBillsByHidAndMonth(hostelId, month, (error, mess_bills) => {
+						for (var i in mess_bills)
+							mess_bills[i].date = require('dateformat')(mess_bills[i].date, "dd-mmm-yyyy");
+						response.render('hostel', { 
 						hostel,
 						user:request.user,
 						topNotifications,
-						mess_bills,
 						hostelUsers,
 						mess_menu,
+						mess_bills
+					});
 					});
 					});
 				});	
 			});
-		});
 	});
 });
 
@@ -142,7 +145,6 @@ app.get('/notifications', (request, response) => {
 		});
 	});
 });
-
 app.listen(port, () => {
 	console.log(`Server is listenning on port: ${port}`);
 });
