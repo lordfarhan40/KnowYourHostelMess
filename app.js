@@ -54,6 +54,7 @@ app.get('/', (request, response) => {
 					console.log(error);
 					response.send(error);
 				}
+				console.log(topNotifications);
 				response.render('index', { 
 					hostel,
 					user:request.user,

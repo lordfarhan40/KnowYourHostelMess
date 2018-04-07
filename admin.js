@@ -6,6 +6,7 @@ const hostels=require('./models/hostels.js');
 const mess_bills=require('./models/mess_bills.js');
 const utility = require('./utility/utility.js');
 const mess_menu = require('./models/mess_menu.js');
+const fs = require('fs');
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials
@@ -129,12 +130,26 @@ function setUpRoutes(app){
       name:req.body.name,
       description:req.body.description
     };
+    var image = req.files.image;
     hostels.createHostel(hostelDetails,(err,isSuccess)=>
     {
       if(!err&&isSuccess==true)
       {
         hostels.getHostelsList((error, result) => {
           var hid = result[result.length -1].hid;
+
+      fs.unlink(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
+        {
+          image.mv(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
+          {
+            if(err)
+            {
+              console.log(err);
+              return res.send("Error");
+            }
+          });
+        });
+        
           mess_menu.createMessMenu(hid, (error, result) => {
             res.redirect('/Manage');
           })
@@ -324,7 +339,6 @@ function setUpRoutes(app){
   });
 
   app.post('/addNotification', require('connect-ensure-login').ensureLoggedIn(loginRequired),(req, res) => {
-   
     utility.addNotification(req.user, req.body, (error, result) => {
       if(error)
         console.log(error);

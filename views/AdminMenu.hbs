@@ -91,9 +91,17 @@
                             <div id="hostel", class="tabcontent animated fadeIn"  style="display:none;width: 100%;height: 700px;">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Hostel</h4>
+                                            <h4 class="card-title">Add Hostel</h4>
                                         </div>
                                         <div class="card-body">
+                                            <form  action="/create_hostel" method="post" encType="multipart/form-data">
+                                                <div align="center">
+                                                    <input type="file" class="col-lg-3 col-md-3 col-sm-3 col-xm-1" style="margin-top: 5px;" name="image">
+                                            </div>
+                                            <b>Hostel Name</b><input type="text" class="form-control" placeholder="Enter Name" name="name"><br>
+                                            <b>Hostel Description</b><input type="text" class="form-control" placeholder="Hostel Description" name="description"><br>
+                                            <button type="submit" class="form-control btn btn-primary shadow">Submit</button>
+                                            </form>
                                         </div>
                                     </div>
                             </div>

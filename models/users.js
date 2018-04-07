@@ -10,7 +10,7 @@ const TableStructure=`
         name char(100) NOT NULL,
         facebook char(100),
         twitter char(100),
-        PRIMARY KEY (uid),
+        PRIMARY KEY (uid)
     )
 `;
 

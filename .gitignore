@@ -1,4 +1,5 @@
 node_modules
 package-lock.json
-public/images/
-public/bills/
+public/images/hostels
+public/images/users
+public/bills
