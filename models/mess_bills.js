@@ -50,8 +50,19 @@ const getBillsByHidAndMonth=(hid,month,callback)=>
     connection.query(getBillsByHidAndMonthQuery,callback);
 }
 
+const deleteBillsByHidAndDate=(hid,date,callback)=>
+{
+    if(hid===undefined||date===undefined)
+        return callback("Provide complete stuff");
+    const deleteBillsByHidAndDateQuery=`
+        DELETE FROM MESSBILLS where hid=${hid} and date=${date};
+    `;
+    connection.query(deleteBillsByHidAndDateQuery,callback);
+}
+
 module.exports={
     createMessBill,
     getBillsByHid,
-    getBillsByHidAndMonthQuery
+    getBillsByHidAndMonth,
+    deleteBillsByHidAndDate
 }
