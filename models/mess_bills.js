@@ -40,9 +40,18 @@ const getBillsByHid=(hid,callback)=>
     connection.query(getBillsByHidQuery,callback);
 };
 
-
+const getBillsByHidAndMonth=(hid,month,callback)=>
+{
+    if(hid===undefined||month===undefined)
+        return callback("Provide complete stuff");
+    const getBillsByHidAndMonthQuery=`
+        SELECT * FROM MESSBILLS where hid=${hid} and MONTH(date)=${month};
+    `;
+    connection.query(getBillsByHidAndMonthQuery,callback);
+}
 
 module.exports={
     createMessBill,
-    getBillsByHid
+    getBillsByHid,
+    getBillsByHidAndMonthQuery
 }
