@@ -1,3 +1,6 @@
+
+
+
 {{!-- New nav Baar --}}
 
   <div class="panel-header" style="height:300px;">
@@ -51,7 +54,7 @@
   {{!-- Modal --}}
 
 
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  <!-- <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
     style="position: absolute;top: 20%">
     <div class="modal-dialog" role="document">
       <div class="modal-content " style="background-color:#1e3d60">
@@ -73,4 +76,56 @@
         </div>
       </div>
     </div>
+  </div> -->
+
+
+  <div class="modal fade modal-primary" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-login">
+    <div class="modal-content">
+      <div class="card card-login card-plain">
+        <!-- <div class="modal-header justify-content-center" >
+          <button  type="button" class="close" data-dismiss="modal" aria-hidden="true"  >
+            <i class="now-ui-icons ui-1_simple-remove" ></i>
+          </button>
+
+          <div class="header header-primary text-center">
+                          <div class="logo-container">
+                              <img src="/assets/img/now-logo.png" alt="">
+                          </div>
+                      </div>
+        </div> -->
+
+         <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form class="form" method="post" action="login">
+            <div class="card-content">
+                            <div class="input-group no-border form-control-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="User id...">
+                            </div>
+
+                            <div class="input-group no-border form-control-lg">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons ui-1_lock-circle-open"></i>
+                                </span>
+                                <input type="password" placeholder="Password..." class="form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary form-control" style="margin-top: 20px; color: black;">Login</button>
+          </form>
+        </div>
+        <div class="modal-footer text-center pt-4">
+           
+        </div>
+      </div>
+    </div>
   </div>
+</div>
