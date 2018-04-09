@@ -20,7 +20,7 @@ app.use(express.static(__dirname +'/public/'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname +'/views/partials/');
 hbs.registerHelper('ifCond', function(v1, v2, options) {
-  if(v1 === v2) {
+  if(v1 === v2 && v1!=undefined && v2!=undefined) {
     return options.fn(this);
   }
   return options.inverse(this);
@@ -130,6 +130,18 @@ app.get("/hostel",(request,response)=>
 					});
 				});	
 			});
+	});
+});
+
+app.post('/deleteBill',(request,response)=>{
+	var hid = request.body.hid;
+	var file = request.body.file;
+	console.log(request.body);
+	mess_bills.deleteBillsByHidAndFile(hid,file,(error)=>{
+		if(error)
+			console.log(error);
+		else
+			response.redirect(`/hostel?hid=${request.body.hid}`);
 	});
 });
 

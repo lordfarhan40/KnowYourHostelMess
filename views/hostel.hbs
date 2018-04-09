@@ -171,7 +171,21 @@
                                                             <tr>
                                                                 <td>{{date}}</td>
                                                                 <td>{{price}}</td>
-                                                                <td><a href="/bills/{{file}}.pdf">View</a></td>
+                                                                <td>
+                                                                    <a href="/bills/{{file}}.pdf">
+                                                                        View 
+                                                                    </a>&nbsp;
+                                                                         {{#ifCond ../hostel.hid ../user.hostel_id}}
+                                                                            <form action="/deleteBill" method="post">
+                                                                                <input type="hidden" name="hid" value="{{hid}}">
+                                                                                <input type="hidden" name="file" value="{{file}}">
+                                                                                 <button type="submit" aria-hidden="true" class="close danger btn-primary" style="border-radius: 4px; background-color:red">
+                                                                                 <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                                             </button>
+                                                                            </form>
+                                                                        {{/ifCond}}
+                                                                        
+                                                                </td>
                                                             </tr>
                                                             {{/each}}
                                                         </tbody>
