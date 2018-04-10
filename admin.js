@@ -6,6 +6,8 @@ const hostels=require('./models/hostels.js');
 const mess_bills=require('./models/mess_bills.js');
 const utility = require('./utility/utility.js');
 const mess_menu = require('./models/mess_menu.js');
+const fs = require('fs');
+
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials
@@ -129,6 +131,7 @@ function setUpRoutes(app){
       name:req.body.name,
       description:req.body.description
     };
+    var image = req.files.image;
     hostels.createHostel(hostelDetails,(err,isSuccess)=>
     {
       if(!err&&isSuccess==true)
