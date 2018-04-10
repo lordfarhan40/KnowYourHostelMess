@@ -96,10 +96,10 @@
                                         <div class="card-body">
                                             <form  action="/create_hostel" method="post" encType="multipart/form-data">
                                                 <div align="center">
-                                                    <input type="file" class="col-lg-3 col-md-3 col-sm-3 col-xm-1" style="margin-top: 5px;" name="image">
+                                                    <input type="file" class="col-lg-3 col-md-3 col-sm-3 col-xm-1" style="margin-top: 5px;" name="image" required>
                                             </div>
-                                            <b>Hostel Name</b><input type="text" class="form-control" placeholder="Enter Name" name="name"><br>
-                                            <b>Hostel Description</b><input type="text" class="form-control" placeholder="Hostel Description" name="description"><br>
+                                            <b>Hostel Name</b><input type="text" class="form-control" placeholder="Enter Name" name="name" required><br>
+                                            <b>Hostel Description</b><input type="text" class="form-control" placeholder="Hostel Description" name="description" required><br>
                                             <button type="submit" class="form-control btn btn-primary shadow">Submit</button>
                                             </form>
                                         </div>

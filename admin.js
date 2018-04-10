@@ -135,6 +135,22 @@ function setUpRoutes(app){
       {
         hostels.getHostelsList((error, result) => {
           var hid = result[result.length -1].hid;
+      if(!fs.existsSync(__dirname +'/public/images/hostels'))
+      {
+        fs.mkdirSync(__dirname +'/public/images/hostels');
+      }
+      fs.unlink(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
+        {
+          image.mv(__dirname +'/public/images/hostels/'+hid+'.jpg',(err)=>
+          {
+            if(err)
+            {
+              console.log(err);
+              return res.send("Error");
+            }
+          });
+        });
+        
           mess_menu.createMessMenu(hid, (error, result) => {
             res.redirect('/Manage');
           })
@@ -253,6 +269,10 @@ function setUpRoutes(app){
       date,
       file
     };
+    if(!fs.existsSync(__dirname+'/public/bills/'))
+    {
+      fs.mkdirSync(__dirname+'/public/bills/');
+    }
     mess_bill.mv(__dirname+'/public/bills/'+file+'.pdf',(err)=>
     {
       mess_bills.createMessBill(finalBill,(err)=>
