@@ -49,7 +49,8 @@ var frameNotifications = (notificationsToShow, callback) => {
         text: notificationsToShow[i].text,
         date: dateFormat(notificationsToShow[i].date, 'dd-mmm-yyyy'),
         name: user,
-        hid: notificationsToShow[i].hid
+        hid: notificationsToShow[i].hid,
+        nid: notificationsToShow[i].nid
       });
     }
     callback(frame);

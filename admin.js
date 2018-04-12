@@ -1,12 +1,13 @@
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 const sha = require('sha256');
-const users = require('./models/users.js');
+const users = require('./models/users.js'); 
 const hostels=require('./models/hostels.js');
 const mess_bills=require('./models/mess_bills.js');
 const utility = require('./utility/utility.js');
 const mess_menu = require('./models/mess_menu.js');
 const fs = require('fs');
+
 // Configure the local strategy for use by Passport.
 //
 // The local strategy require a `verify` function which receives the credentials
@@ -346,6 +347,7 @@ function setUpRoutes(app){
   });
 
   app.post('/addNotification', require('connect-ensure-login').ensureLoggedIn(loginRequired),(req, res) => {
+   
     utility.addNotification(req.user, req.body, (error, result) => {
       if(error)
         console.log(error);
@@ -356,7 +358,7 @@ function setUpRoutes(app){
   });
 
   app.post('/deleteNotification', require('connect-ensure-login').ensureLoggedIn(loginRequired), (req, res) => {
-    utility.removeNotification(req.body.nid, (error, result) => {
+        utility.removeNotification(req.body.nid, (error, result) => {
       if(error) {
         res.send(error);
         console.log(error);
