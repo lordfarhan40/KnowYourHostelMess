@@ -9,33 +9,13 @@
                 {{>nav}}
                 <div class="content">    
                         <div class="row ">
-                            <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
+                             <div class="col-xm-12 col-sm-12 col-md-4 col-lg-4">
                                 <div class="card " >
+                                    <img class="card-img-top" src="/images/hostels/{{hostel.hid}}.jpg" alt="Card image" style="width:100%;height:400px; margin-top: 10px;">
                                     <div class="card-body">
-                                      <h4 class="card-title">Know Your Mess</h4>
-                                      <hr class="bg-primary">
-                                      <p class="card-text"><div>
-                                            <h5>Current month's</h5>
-                                            <div style="padding-left: 16px;">
-                                              <b>Per day cost: ₹</b>200<br>
-                                              <b>Total expanses: ₹</b>750000<br>
-                                              <b>Running days: </b>21<br>
-                                            </div>
-                                            <br>
-                                            <h5>Previous month's</h5>
-                                            <div style="padding-left: 16px;">
-                                              <b>Per day cost: ₹</b>200<br>
-                                              <b>Total expanses: ₹</b>750000<br>
-                                              <b>Running days: </b>21<br>
-                                            </div>
-                                            <br>
-                                            <h5>This Sessions</h5>
-                                            <div style="padding-left: 16px;">
-                                              <b>Avg. Per day cost: ₹</b>200<br>
-                                              <b>Total expanses: ₹</b>750000<br>
-                                              <b>Running days: </b>21<br>
-                                            </div>
-                                          </div>
+                                      <h4 class="card-title ">{{hostel.name}}</h4>
+                                      <p class="card-text">{{hostel.description}}<br>
+                                        Per Day Expenses:  ₹{{hotsel.pde}}
                                       </p>
                                     </div>
                                 </div>      
@@ -70,9 +50,10 @@
                                                <div  >
                                                 <form  action="/UploadBill" method="post" encType="multipart/form-data">
                                                   <input type="hidden" name="hid" value="{{hostel.hid}}"/>
-                                                  <input type="file"  class='btn justify-content-center' name="mess_bill" required>
+                                                 <input type="file"  class='btn justify-content-center' name="mess_bill" required><br>(.pdf files only)<br>
                                                   <br><b>Mess Bill Price</b>
                                                   <input type="number" class="form-control" placeholder="Enter total mess bill." value="0" name="price" required><br>
+                                                 
                                                   <b>Mess Bill Date</b><input type="date" class="form-control" placeholder="Mess Bill Date" name="date" required><br>
                                                   <button type="submit" class="form-control btn btn-primary ">Submit</button>
                                                 </form>
