@@ -38,7 +38,6 @@ You should be able to run the following command after the installation procedure
 
 
 <a name="blockquotes"/>
-## Blockquotes
 
 ```no-highlight
 $ node --version
